@@ -11,7 +11,7 @@ variables:
 # Name the stages involved in the pipeline
 stages:
 -  build
-- deploy
+-  deploy
 
 cache:
   paths:
