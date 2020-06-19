@@ -19,6 +19,7 @@ pages:
   script:
     - cd Frontend
     - echo "Building deploy package"
+    - npm install react
     - yarn install
     - yarn build
     - echo "Build successful"
