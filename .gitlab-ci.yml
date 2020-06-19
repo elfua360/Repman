@@ -22,6 +22,7 @@ pages:
     - npm -g install react
     - npm install react-scripts
     - npm -g install react-scripts
+    - cp -r node_modules ../
     - yarn install
     - pwd
     - yarn build
