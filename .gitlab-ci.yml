@@ -10,8 +10,9 @@ variables:
 
 # Name the stages involved in the pipeline
 stages:
+- build
 - deploy
--  build
+
 cache:
   paths:
     - node_modules/
