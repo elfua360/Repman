@@ -20,6 +20,8 @@ pages:
     - cd Frontend
     - echo "Building deploy package"
     - npm -g install react
+    - npm install react-scripts
+    - npm -g install react-scripts
     - yarn install
     - yarn build
     - echo "Build successful"
