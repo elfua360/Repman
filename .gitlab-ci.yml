@@ -28,7 +28,7 @@ pagesbuild:
       - echo "Build successful"
     artifacts:
       paths:
-        - Fronted/build
+        - Frontend/build
 pages:
   stage: deploy
   dependencies:
