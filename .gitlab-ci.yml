@@ -10,8 +10,9 @@ variables:
 
 # Name the stages involved in the pipeline
 stages:
-- deploy
 -  build
+- deploy
+
 cache:
   paths:
     - node_modules/
@@ -27,7 +28,7 @@ pagesbuild:
       - echo "Build successful"
     artifacts:
       paths:
-        - build
+        - Fronted/build
 pages:
   stage: deploy
   dependencies:
