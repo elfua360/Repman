@@ -30,6 +30,17 @@ testapi:
     - npm test
   coverage:
     '/Statements.*?(\d+(?:\.\d+)?)%/'
+buildapi:
+  image: docker:19.03.11
+  stage: build
+  script:
+    - cd Api
+    -  docker pull $CI_REGISTRY_IMAGE:latest || true
+    - docker build --cache-from $CI_REGISTRY_IMAGE:latest --tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA --tag $CI_REGISTRY_IMAGE:latest .
+    -  docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker push $CI_REGISTRY_IMAGE:latest
+#    - docker run my-docker-image /script/to/run/tests
 
 pagesbuild:
     stage: build
