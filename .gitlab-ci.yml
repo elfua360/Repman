@@ -10,6 +10,7 @@ variables:
 
 # Name the stages involved in the pipeline
 stages:
+-  test
 -  build
 -  deploy
 
@@ -18,6 +19,18 @@ cache:
     - node_modules/
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
+testapi:
+  stage: test
+  services:
+    - mongo:latest
+  script:
+    - cd Api
+    - npm i npm@latest -g
+    - npm i
+    - npm test
+  coverage:
+    '/Statements.*?(\d+(?:\.\d+)?)%/'
+
 pagesbuild:
     stage: build
     script:
