@@ -33,9 +33,11 @@ testapi:
   coverage:
     '/Statements.*?(\d+(?:\.\d+)?)%/'
 buildapi:
-  image:  gcr.io/kaniko-project/executor:debug
+  image:  
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   stage: build
-  entrypoint: [""]
+  
   script:
     - cd Api
     - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
