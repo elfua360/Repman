@@ -33,7 +33,7 @@ testapi:
   coverage:
     '/Statements.*?(\d+(?:\.\d+)?)%/'
 buildapi:
-  image:  docker:19.03.11-dind
+  image:  docker:18.09.8-dind
   stage: build
   script:
     - cd Api
