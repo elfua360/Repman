@@ -4,7 +4,7 @@
 //import vm from "v-response";
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const vm = require("vm");
+const vm = require("v-response");
 const RegisterModel = require('./register.model');
 
 exports.login = (req, res, next) => {
