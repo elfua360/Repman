@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import LoginPage from './pages/LoginPage';
-import Header from "./components/Header";
 import Nav from "react-bootstrap/Nav";
 
 function App() {
