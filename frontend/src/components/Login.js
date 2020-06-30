@@ -23,7 +23,8 @@ function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password"/>
                     <Form.Text className="as">
-                        <a onClick={doLogin} href="">Forget Password</a>
+                        <Button variant="link" className="forget-pass">Forget Password</Button>
+                        <br/>
                     </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
