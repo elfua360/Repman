@@ -1,7 +1,11 @@
-import RegisterModel from "./register.model"
-import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
-import vm from "v-response"
+//import RegisterModel from "../register/register.model";
+//import jwt from "jsonwebtoken";
+//import bcrypt from "bcrypt";
+//import vm from "v-response";
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const vm = require("vm");
+const RegisterModel = require('./register.model');
 
 exports.login = (req, res, next) => {
     const email = req.body.email;
@@ -10,13 +14,13 @@ exports.login = (req, res, next) => {
         .then(user => {
             if (!user) {
                 return res.status(400)
-                    .json(vm.ApiResponse(false, 400, "Email not found"));
+                    .json(vm.ApiResponse(false, 400, "No such email found"))
             }
             bcrypt.compare(password, user.password)
                 .then((isMatch) => {
                     if (!isMatch) {
                         return res.status(400)
-                            .json(vm.ApiResponse(false, 400, "Incorrect password"));
+                            .json(vm.ApiResponse(false, 400, "incorrect password"))
                     }
                     if (isMatch) {
                         const payload = {id: user.id};
@@ -26,8 +30,11 @@ exports.login = (req, res, next) => {
                                     user: user,
                                     toke: "Bearer " + token
                                 }));
+
                         });
+
                     }
                 })
         })
+
 };
