@@ -1,15 +1,11 @@
-//import RegisterModel from "../register/register.model";
-//import jwt from "jsonwebtoken";
-//import bcrypt from "bcrypt";
-//import vm from "v-response";
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const vm = require("v-response");
 const RegisterModel = require('./register.model');
 
 exports.create = async (req, res, next) => {
-    // checking if the email provided already exist in the DB
-    //console.log(req.body.email);
+    // checking if email already exists
+    getDateFormatted();
     await RegisterModel.findOne({email: req.body.email})
         .then(email_exist => {
             //if it exist we are returning an error message
@@ -50,21 +46,16 @@ exports.create = async (req, res, next) => {
 
 };
 
-//find a user by id
-/*exports.findOne = (req, res, next) => {
-    RegisterModel.findOne({_id: req.params.id})
-        .then(found => {
-            if (!found) {
-                return res.status(400)
-                    .json(vm.ApiResponse(false, 400, "unable to find a user with provided id"))
-            } else if (found) {
-                return res.status(200)
-                    .json(vm.ApiResponse(true, 200, "success", found))
-            }
-        }).catch(error => {
-        return res.status(500)
-            .json(vm.ApiResponse(false, 500, "hoop internal server error", undefined, error));
-    })
+function getDateFormatted() {
+    var date = new Date();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getFullYear();
 
-};*/
+    month = month > 9 ? month : "0" + month.toString();
+    day = day > 9 ? day : "0" + day.toString();
+    return month + "/" + day + "/" + year;
+}
+
+
 

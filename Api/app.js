@@ -18,7 +18,7 @@ var app = express();
 //const port = process.env.PORT || config.get("app-port");
 const prefix = config.get("api.prefix");
 const db = config.get("database.url");
-
+//var date = new Date();
 app.use(function (req, res, next) {
 
   res.header("Access-Control-Allow-Origin", "*");
