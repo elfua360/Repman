@@ -11,7 +11,7 @@ module.exports = {
     },
 
     api: {
-        prefix: '^/api/v[1-9]',
+        prefix: '^/api/',
         version: [1],
 
     },
