@@ -50,29 +50,8 @@ exports.create = async (req, res, next) => {
 
 };
 
-
-// list of all successful registrations (user)
-exports.find = (req, res, next) => {
-    RegisterModel.find()
-        .sort({createdAt: -1})
-        .then((response) => {
-            if (!response) {
-                return res.status(400)
-                    .json(vm.ApiResponse(false, 400, "hoops an error occur unable to find users"))
-            } else {
-
-                return res.status(200)
-                    .json(vm.ApiResponse(true, 200, "success", response))
-            }
-        }).catch(error => {
-        return res.status(500)
-            .json(vm.ApiResponse(false, 500, "hoops an error occur", undefined, error));
-    })
-
-};
-
 //find a user by id
-exports.findOne = (req, res, next) => {
+/*exports.findOne = (req, res, next) => {
     RegisterModel.findOne({_id: req.params.id})
         .then(found => {
             if (!found) {
@@ -87,5 +66,5 @@ exports.findOne = (req, res, next) => {
             .json(vm.ApiResponse(false, 500, "hoop internal server error", undefined, error));
     })
 
-};
+};*/
 
