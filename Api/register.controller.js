@@ -24,6 +24,7 @@ exports.create = async (req, res, next) => {
                 bcrypt.hash(new_user.password, salt, (err, hash) => {
                     //here we are updating the plain text to an hashed password
                     new_user.password = hash;
+                    new_user.date = getDateFormatted();
                     new_user.save()
                         .then((saved) => {
                             if (!saved) {
