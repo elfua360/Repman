@@ -24,6 +24,7 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11",
-    "@sendgrid/mail": "^7.2.1"
+    "@sendgrid/mail": "^7.2.1",
+    "randomstring": "^1.1.5"
   }
 }

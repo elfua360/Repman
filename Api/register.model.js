@@ -22,6 +22,11 @@ const userSchema = new Schema({
     date: {
         type: String,
         required: true
+    },
+    active: {
+        type: Boolean,
+        default: false,
+        required: true
     }
 });
 
