@@ -14,11 +14,11 @@ stages:
 -  build
 -  deploy
 
-cache:
-  paths:
-    - node_modules/
-    - Api/node_modules/
-    - frontend/node_modules/
+#cache:
+#  paths:
+#    - node_modules/
+#    - Api/node_modules/
+ #   - frontend/node_modules/
 # Job name for gitlab to recognise this results in assets for Gitlab Pages
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
 testapi:

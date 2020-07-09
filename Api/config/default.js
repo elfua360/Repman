@@ -15,6 +15,7 @@ module.exports = {
         version: [1],
 
     },
+
     database: {
         url: process.env.DB_URL,
 
