@@ -5,5 +5,6 @@ const router = express.Router();
 /* GET users listing. */
 router.get("/users", user_controller.find);
 router.get("/delete/:id", user_controller.deleteOne);
+router.get("/resend/:id", user_controller.resendVerification);
 
 module.exports = router;
