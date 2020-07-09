@@ -43,6 +43,7 @@ app.use(prefix, loginRouter);
 app.use(prefix, registerRouter);
 
 
+
 //app.listen(port, vm.log("listing on port", port));
 
 // catch 404 and forward to error handler

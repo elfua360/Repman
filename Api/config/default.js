@@ -6,8 +6,7 @@ module.exports = {
         superSecret: "power",
         baseUrl: `http://localhost:`,
         port: process.env.PORT,
-        expiresIn: 86400
-
+        expiresIn: 86400,
     },
 
     api: {
