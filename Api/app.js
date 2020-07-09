@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
+var recipeRouter = require('./routes/recipe');
 var app = express();
 
 //const port = process.env.PORT || config.get("app-port");
@@ -41,6 +42,7 @@ app.use('/', indexRouter);
 app.use(prefix, usersRouter);
 app.use(prefix, loginRouter);
 app.use(prefix, registerRouter);
+app.use(prefix, recipeRouter);
 
 
 //app.listen(port, vm.log("listing on port", port));
@@ -65,3 +67,4 @@ mongoose.connect(db,{ useNewUrlParser: true,useUnifiedTopology: true } )
     .catch(err => vm.log("error mongodb", err));
 
 module.exports = app;
+
