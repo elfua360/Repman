@@ -62,7 +62,7 @@ exports.resendVerification = (req, res, next) => {
                                 subject: 'Activate your account!',
                                 text: 'Hi there! Thank you for making an account with Repman! Click this link to activate your account.\n' +
                                     'https://jd2f.aleccoder.space/api/verify/' + user.token,
-                                html: '<strong>Hi there! Thank you for making an account with Repman! Click this link to activate your account</strong><br><br>' +
+                                html: '<strong>Hi there! Thank you for making an account with Repman! Click this link to activate your account.</strong><br><br>' +
                                     '<a href="http://localhost:3001/api/verify/' + user.token + '">Activate my account!</a>'
                             };
                             (async () => {
