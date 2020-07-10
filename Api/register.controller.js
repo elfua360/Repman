@@ -43,10 +43,10 @@ exports.create = async (req, res, next) => {
                                     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                                     const msg = {
                                         to: new_user.email,
-                                        from: 'michaelortiz05@hotmail.com',
+                                        from: 'authentication@em3320.jd2f.aleccoder.space',
                                         subject: 'Activate your account!',
                                         text: 'Hi there! Thank you for making an account with Repman! Click this link to activate your account.\n' +
-                                            'http://localhost:3001/api/verify/' + new_verify.token,
+                                            'https://jd2f.aleccoder.space/api/verify/' + new_verify.token,
                                         html: '<strong>Hi there! Thank you for making an account with Repman! Click this link to activate your account</strong><br><br>' +
                                             '<a href="http://localhost:3001/api/verify/' + new_verify.token + '">Activate my account!</a>'
                                     };
