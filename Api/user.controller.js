@@ -31,16 +31,16 @@ exports.resendVerification = (req, res, next) => {
         }
 
         if (!user) {
-            return res.status(500)
-                .json(vm.ApiResponse(false, 400, "unable to find user"));
+            return res.status(409)
+                .json(vm.ApiResponse(false, 409, "unable to find user"));
         }
 
         else {
             user.token = randomstring.generate({length:128})
             user.save(function(err) {
                 if (err) {
-                    return res.status(400)
-                        .json(vm.ApiResponse(false, 400, "unable to resend verification"));
+                    return res.status(500)
+                        .json(vm.ApiResponse(false, 500, "unable to resend verification"));
                 }
                 else {
                     RegisterModel.findOne({_id: user.user_id}, function(err, result) {
@@ -50,8 +50,8 @@ exports.resendVerification = (req, res, next) => {
                         }
 
                         if (!result) {
-                            return res.status(400)
-                                .json(vm.ApiResponse(false, 400, "unable to find user"));
+                            return res.status(409)
+                                .json(vm.ApiResponse(false, 409, "unable to find user"));
                         }
 
                         else {
@@ -63,7 +63,7 @@ exports.resendVerification = (req, res, next) => {
                                 text: 'Hi there! Thank you for making an account with Repman! Click this link to activate your account.\n' +
                                     'https://jd2f.aleccoder.space/api/verify/' + user.token,
                                 html: '<strong>Hi there! Thank you for making an account with Repman! Click this link to activate your account.</strong><br><br>' +
-                                    '<a href="http://localhost:3001/api/verify/' + user.token + '">Activate my account!</a>'
+                                    '<a href="https://jd2f.aleccoder.space/api/verify/' + user.token + '">Activate my account!</a>'
                             };
                             (async () => {
                                 try {
@@ -76,6 +76,8 @@ exports.resendVerification = (req, res, next) => {
                                     }
                                 }
                             })();
+                            return res.status(200)
+                                .json(vm.ApiResponse(true, 200, "verification resent"));
                         }
                     });
                 }

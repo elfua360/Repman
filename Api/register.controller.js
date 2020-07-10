@@ -48,7 +48,7 @@ exports.create = async (req, res, next) => {
                                         text: 'Hi there! Thank you for making an account with Repman! Click this link to activate your account.\n' +
                                             'https://jd2f.aleccoder.space/api/verify/' + new_verify.token,
                                         html: '<strong>Hi there! Thank you for making an account with Repman! Click this link to activate your account.</strong><br><br>' +
-                                            '<a href="http://localhost:3001/api/verify/' + new_verify.token + '">Activate my account!</a>'
+                                            '<a href="https://jd2f.aleccoder.space/api/verify/' + new_verify.token + '">Activate my account!</a>'
                                     };
                                     (async () => {
                                         try {
@@ -81,7 +81,7 @@ exports.create = async (req, res, next) => {
 exports.verify = (req, res, next) => {
     VerificationModel.findOne({token: req.params.token}, function(err, result) {
         if (err) {
-            return res.status(409)
+            return res.status(500)
                 .json(vm.ApiResponse(false, 500, "something went wrong"));
         }
         else if (!result) {
@@ -94,18 +94,18 @@ exports.verify = (req, res, next) => {
             RegisterModel.findOneAndUpdate({_id:user_verify.user_id}, {active: true}, function (err) {
                 if (err) {
                     return res.status(500)
-                        .json(vm.ApiResponse(false, 500, "unable to activate account", err));
+                        .json(vm.ApiResponse(false, 500, "something went wrong", err));
                 }
 
                 else {
                     VerificationModel.deleteOne({user_id: user_verify.user_id}, function(err) {
                         if (err) {
-                            return res.status(400)
-                                .json(vm.ApiResponse(false, 400, "something went wrong"));
+                            return res.status(500)
+                                .json(vm.ApiResponse(false, 500, "something went wrong"));
                         }
                         else {
-                            return res.status(409)
-                                .json(vm.ApiResponse(true, 409, "account activated"));
+                            return res.status(200)
+                                .json(vm.ApiResponse(true, 200, "account activated"));
                         }
                     });
                 }

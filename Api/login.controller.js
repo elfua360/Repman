@@ -28,7 +28,7 @@ exports.login = (req, res, next) => {
                             return res.status(200)
                                 .json(vm.ApiResponse(true, 200, "login successful", {
                                     user: user,
-                                    toke: "Bearer " + token
+                                    token: "Bearer " + token
                                 }));
 
                         });
