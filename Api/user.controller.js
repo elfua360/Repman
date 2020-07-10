@@ -19,7 +19,7 @@ exports.find = (req, res, next) => {
             }
         }).catch(error => {
         return res.status(500)
-            .json(vm.ApiResponse(false, 500, "Oops an error occur", undefined, error));
+            .json(vm.ApiResponse(false, 500, "Oops an error occurred", undefined, error));
     })
 };
 
@@ -63,7 +63,7 @@ exports.resendVerification = (req, res, next) => {
                                 text: 'Hi there! Thank you for making an account with Repman! Click this link to activate your account.\n' +
                                     'https://jd2f.aleccoder.space/api/verify/' + user.token,
                                 html: '<strong>Hi there! Thank you for making an account with Repman! Click this link to activate your account.</strong><br><br>' +
-                                    '<a href="https://jd2f.aleccoder.space/api/verify/' + user.token + '">Activate my account!</a>'
+                                    '<a href="https://jd2.aleccoder.space/api/verify/' + user.token + '">Activate my account!</a>'
                             };
                             (async () => {
                                 try {
