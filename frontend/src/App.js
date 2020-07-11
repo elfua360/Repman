@@ -3,6 +3,7 @@ import './App.css';
 import LoginPage from './pages/LoginPage';
 import Nav from "react-bootstrap/Nav";
 import RegisterPage from "./pages/RegisterPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 class App extends React.Component {
     constructor(props) {
@@ -16,8 +17,10 @@ class App extends React.Component {
         console.log(this.state.page)
         if(this.state.page === "login"){
             return <LoginPage/>;
-        }else{
+        }else if(this.state.page === "register"){
             return <RegisterPage/>;
+        }else if(this.state.page === "forgotPassword"){
+            return <ForgotPasswordPage/>;
         }
     };
     render() {
@@ -40,6 +43,9 @@ class App extends React.Component {
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link eventKey="register">Register</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="forgotPassword">Forgot Password</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <br/>
