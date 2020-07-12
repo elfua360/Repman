@@ -8,6 +8,8 @@ var mongoose = require('mongoose');
 var vm = require('v-response');
 var config = require('config');
 var logger = require('morgan');
+var session = require('express-session');
+var connectStore = require('connect-mongo');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -16,9 +18,31 @@ var registerRouter = require('./routes/register');
 var recipeRouter = require('./routes/recipe');
 var app = express();
 
+const MongoStore = connectStore(session);
 //const port = process.env.PORT || config.get("app-port");
 const prefix = config.get("api.prefix");
 const db = config.get("database.url");
+mongoose.connect(db,{ useNewUrlParser: true,useUnifiedTopology: true } )
+    .then(() => vm.log("connected to MongoDB", db))
+    .catch(err => vm.log("error mongodb", err));
+
+app.use(session({
+  name: process.env.SESS_NAME,
+  secret: process.env.SESS_SECRET,
+  saveUninitialized: false,
+  resave: false,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    collection: 'session',
+    ttl: parseInt(process.envSESS_LIFETIME) / 1000
+  }),
+  cookie: {
+    path: '/',
+    sameSite: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: parseInt(process.env.SESS_LIFETIME)
+  }
+}));
 //var date = new Date();
 app.use(function (req, res, next) {
 
@@ -63,9 +87,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-mongoose.connect(db,{ useNewUrlParser: true,useUnifiedTopology: true } )
-    .then(() => vm.log("connected to MongoDB", db))
-    .catch(err => vm.log("error mongodb", err));
 
 module.exports = app;
 

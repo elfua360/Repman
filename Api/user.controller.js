@@ -1,4 +1,5 @@
 const RegisterModel = require('./register.model');
+const jwt = require("jsonwebtoken");
 const VerificationModel = require('./verification.model');
 const vm = require("v-response");
 const sgMail = require('@sendgrid/mail');
@@ -24,6 +25,7 @@ exports.find = (req, res, next) => {
 };
 
 exports.resendVerification = (req, res, next) => {
+
     VerificationModel.findOne({user_id: req.params.id}, function(err, user) {
         if (err) {
             return res.status(500)
@@ -101,6 +103,42 @@ exports.deleteOne = (req, res, next) => {
             .json(vm.ApiResponse(false, 500, "server error", undefined, error));
     })
 };
+
+exports.recoverPassword = (req, res, next) => {
+    RegisterModel.findOne({email: req.body.email})
+        .then(email_exist => {
+            //if it exist we are returning an error message
+            if (email_exist) {
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                const msg = {
+                    to: req.body.email,
+                    from: 'recovery@em3320.jd2f.aleccoder.space',
+                    subject: 'Recover your password!',
+                    text: 'Forgot your password? click this link to create a new one.\n' +
+                        'This is the place for the link',
+                    html: '<strong>Forgot your password? click this link to create a new one.</strong><br><br>' +
+                        '<a href="SomeLink' + '">Recover my password!</a>'
+                };
+                (async () => {
+                    try {
+                        await sgMail.send(msg);
+                    } catch (error) {
+                        console.error(error);
+
+                        if (error.response) {
+                            console.error(error.response.body)
+                        }
+                    }
+                })();
+                return res.status(201)
+                    .json(vm.ApiResponse(true, 201, "forgot password link sent"));
+            }
+            else {
+                return res.status(409)
+                    .json(vm.ApiResponse(false, 409, "Email not found!"));
+            }
+        });
+}
 
 //find a user by id
 /*exports.findOne = (req, res, next) => {
