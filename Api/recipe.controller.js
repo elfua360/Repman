@@ -49,5 +49,56 @@ exports.create = (req, res, next) => {
 };
 
 
+exports.delete = (req, res, next) => {
+
+    // TODO: check if this is a list, we could do bulk removal.
+    let id_to_remove = req.body.id;
+    RecipeModel.remove(
+        { _id: id_to_remove }
+    )
+        .then(result => {
+            return res.status(201)
+                .json(vm.ApiResponse(true, 201, "recipe deleted from database"));
+            })
+        .catch(error=> {
+            return res.status(500)
+                .json(vm.ApiResponse(false, 500, error));
+            }
+        )
+
+};
+
+exports.update = (req, res, next) => {
+
+    // TODO: check if this is a list, we could do bulk removal.
+    let id_to_update = req.body.id
+    RecipeModel.findOneAndUpdate(
+        { _id: id_to_update },
+        {
+            $set: {
+                name: req.body.name,
+                owner_id: req.body.owner_id,
+                ingredients: req.body.ingredients,
+                tags: req.body.tags,
+                steps: req.body.steps
+            }
+        },
+        {
+            upsert: true
+        }
+
+
+    )
+        .then(result => {
+            return res.status(201)
+                .json(vm.ApiResponse(true, 201, result));
+        })
+        .catch(error=> {
+                return res.status(500)
+                    .json(vm.ApiResponse(false, 500, error));
+            }
+        )
+
+};
 
 
