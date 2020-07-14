@@ -24,7 +24,7 @@ function Register() {
                     }
                     else{
                         document.getElementById("registerError").className = "alert alert-danger";
-                        document.getElementById("registerError").innerHTML = "Error creating account\n" + JSON.parse(xhr.responseText).message;
+                        document.getElementById("registerError").innerHTML = "Error " + this.status + ": " + JSON.parse(xhr.responseText).message;
                     }
                 }
               });
@@ -32,13 +32,12 @@ function Register() {
         catch(err){
             document.getElementById("registerError").className = "alert alert-danger";
             document.getElementById("registerError").innerHTML = err.message;
-        
         }
 
         xhr.open("POST", "https://jd2.aleccoder.space/api/register")
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhr.send(jsonPayload);
-        event.preventDefault(); // TODO: replace with redirect to recipe page
+        event.preventDefault(); // TODO: figure out if this is necessary
     };
     return (
         <>
@@ -69,34 +68,11 @@ function Register() {
                 <Button variant="primary" type="submit">
                     Sign Up
                 </Button>
-
                 
                 <div role="alert" id="registerError">
                 </div>
             </Form>
         </>
-
-
-
-        /*
-        <>
-            <h1 id="registerTitle">Register Here</h1>
-            <div id="register">
-                <form onSubmit={doRegister}>
-                    <span id="usernameRegisterTitle">Username</span>
-                    <input type="text" id="usernameRegister" placeholder="Username"/>
-                    <br/>
-                    <span id="passwordRegisterTitle">Password</span>
-                    <input type="password" id="passwordCreate" placeholder="Password"/>
-                    <br/>
-                    <input type="submit" id="createButton" class="button" value="Create Account"
-                           onClick={doRegister}/>
-                </form>
-                <span id="registerResult"></span>
-            </div>
-        </>
-        */
-
     );
 };
 export default Register;
