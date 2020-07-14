@@ -5,50 +5,66 @@ import "./Login.css";
 
 function Login() {
     const doLogin = async event => {
-        alert(event)
-        event.preventDefault();
+        var email = document.getElementById("registerEmail").value;
+        var password = document.getElementById("registerPassword").value;
+        var jsonPayload = JSON.stringify({"email": email, "password": password});
+        alert(jsonPayload); // DELETEME
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        try{
+            xhr.addEventListener("readystatechange", function() {
+                if(this.readyState === 4) {
+                    if (this.status === 201){
+                        document.getElementById("loginError").className = "alert alert-success";
+                        document.getElementById("loginError").innerHTML = "Login successful";
+                        // TODO: redirect to main page on successful login
+                    }
+                    else{
+                        document.getElementById("loginError").className = "alert alert-danger";
+                        document.getElementById("loginError").innerHTML = "Error " + this.status + ": " + JSON.parse(xhr.responseText).message;
+                    }
+                }
+            });
+        }
+        catch(err){
+            document.getElementById("loginError").className = "alert alert-danger";
+            document.getElementById("loginError").innerHTML = err.message;
+        }
+
+        xhr.open("POST", "https://jd2.aleccoder.space/api/login")
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.send(jsonPayload);
+        event.preventDefault(); // TODO: redirect on successful login
     };
     return (
         <>
             <Form onSubmit={doLogin}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="loginEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email"/>
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group controlId="loginPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password"/>
-                    <Form.Text className="as">
+                    {/*<Form.Text className="as">
                         <Button variant="link" className="forget-pass">Forget Password</Button>
                         <br/>
-                    </Form.Text>
+                    </Form.Text>*/}
                 </Form.Group>
-                <Form.Group controlId="formBasicCheckbox">
+                {/*<Form.Group controlId="formBasicCheckbox">
                     <Form.Check type="checkbox" label="Check me out"/>
-                </Form.Group>
+                </Form.Group>*/}
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
+
+                <div role="alert" id="loginError">
+                </div>
             </Form>
-
-            {/*<h1 id="loginTitle">Login Here</h1>*/}
-            {/*<div id="login">*/}
-            {/*<form onSubmit={doLogin}>*/}
-            {/*<span id="usernameLoginTitle">Username</span>*/}
-            {/*<input type="text" id="usernameLogin" placeholder="Username"/>*/}
-            {/*<br/>*/}
-            {/*<span id="passwordLoginTitle">Password</span>*/}
-            {/*<input type="password" id="passwordEnter" placeholder="Password"/>*/}
-            {/*<br/>*/}
-            {/*<input type="submit" id="loginButton" class="button" value="Sign In"*/}
-            {/*onClick={doLogin}/>*/}
-            {/*</form>*/}
-            {/*<span id="loginResult"></span>*/}
-            {/*</div>*/}
-
         </>
-
     );
 };
 export default Login;
