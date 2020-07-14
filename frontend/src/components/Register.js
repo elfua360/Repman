@@ -18,14 +18,14 @@ function Register() {
         try{
             xhr.addEventListener("readystatechange", function() {
                 if(this.readyState === 4) {
-                  if (this.status === 0 || (this.status >= 200 && this.status < 400)){
-                    document.getElementById("registerError").className = "alert alert-success";
-                    document.getElementById("registerError").innerHTML = "Account successfully created";
-                  }
-                  else{
-                    document.getElementById("registerError").className = "alert alert-danger";
-                    document.getElementById("registerError").innerHTML = "Error creating account";
-                  }
+                    if (this.status === 201){
+                        document.getElementById("registerError").className = "alert alert-success";
+                        document.getElementById("registerError").innerHTML = "Account successfully created";
+                    }
+                    else{
+                        document.getElementById("registerError").className = "alert alert-danger";
+                        document.getElementById("registerError").innerHTML = "Error creating account\n" + JSON.parse(xhr.responseText).message;
+                    }
                 }
               });
         }
@@ -36,7 +36,7 @@ function Register() {
         }
 
         xhr.open("POST", "https://jd2.aleccoder.space/api/register")
-        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhr.send(jsonPayload);
         event.preventDefault(); // TODO: replace with redirect to recipe page
     };
