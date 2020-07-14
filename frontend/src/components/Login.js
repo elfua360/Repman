@@ -16,7 +16,7 @@ function Login() {
         try{
             xhr.addEventListener("readystatechange", function() {
                 if(this.readyState === 4) {
-                    if (this.status === 201){
+                    if (this.status === 200){
                         document.getElementById("loginError").className = "alert alert-success";
                         document.getElementById("loginError").innerHTML = "Login successful";
                         // TODO: redirect to main page on successful login
