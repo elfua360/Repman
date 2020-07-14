@@ -5,8 +5,8 @@ import "./Login.css";
 
 function Login() {
     const doLogin = async event => {
-        var email = document.getElementById("registerEmail").value;
-        var password = document.getElementById("registerPassword").value;
+        var email = document.getElementById("loginEmail").value;
+        var password = document.getElementById("loginPassword").value;
         var jsonPayload = JSON.stringify({"email": email, "password": password});
         alert(jsonPayload); // DELETEME
 
