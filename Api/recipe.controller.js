@@ -75,13 +75,8 @@ exports.update = (req, res, next) => {
     RecipeModel.findOneAndUpdate(
         { _id: id_to_update },
         {
-            $set: {
-                name: req.body.name,
-                owner_id: req.body.owner_id,
-                ingredients: req.body.ingredients,
-                tags: req.body.tags,
-                steps: req.body.steps
-            }
+            $set: req.body
+
         },
         {
             upsert: true
