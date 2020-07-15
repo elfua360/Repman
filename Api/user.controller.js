@@ -4,6 +4,7 @@ const VerificationModel = require('./verification.model');
 const vm = require("v-response");
 const sgMail = require('@sendgrid/mail');
 const randomstring = require("randomstring");
+const bcrypt = require("bcrypt");
 
 // list of all successful registrations (user)
 exports.find = (req, res, next) => {
@@ -42,13 +43,13 @@ exports.resendVerification = (req, res, next) => {
             user.save(function(err) {
                 if (err) {
                     return res.status(500)
-                        .json(vm.ApiResponse(false, 500, "unable to resend verification"));
+                        .json(vm.ApiResponse(false, 500, "Something went wrong"));
                 }
                 else {
                     RegisterModel.findOne({_id: user.user_id}, function(err, result) {
                         if (err) {
                             return res.status(500)
-                                .json(vm.ApiResponse(false, 500, "unable to resend verification"));
+                                .json(vm.ApiResponse(false, 500, "something went wrong"));
                         }
 
                         if (!result) {
@@ -103,6 +104,26 @@ exports.deleteOne = (req, res, next) => {
             .json(vm.ApiResponse(false, 500, "server error", undefined, error));
     })
 };
+
+exports.changePassword = (req, res, next) => {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+            if (err) {
+                return res.status(500)
+                    .json(vm.ApiResponse(false, 500, "server error"))
+            }
+            RegisterModel.findOneAndUpdate({_id: req.body.id}, {password: hash}, function(err, result) {
+                if (err) {
+                    return res.status(500)
+                        .json(vm.ApiResponse(false, 500, "server error"))
+                }
+
+                return res.status(500)
+                    .json(vm.ApiResponse(true, 200, "password updated"))
+            })
+        })
+    })
+}
 
 exports.recoverPassword = (req, res, next) => {
     RegisterModel.findOne({email: req.body.email})
