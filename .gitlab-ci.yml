@@ -23,8 +23,6 @@ stages:
 # https://docs.gitlab.com/ee/user/project/pages/introduction.html#gitlab-pages-requirements
 testapi:
   stage: test
-  services:
-    - mongo:latest
   script:
     - cd Api
     - npm i npm@latest -g
