@@ -125,20 +125,29 @@ exports.changePassword = (req, res, next) => {
     })
 }
 
-exports.recoverPassword = (req, res, next) => {
-    RegisterModel.findOne({email: req.body.email})
-        .then(email_exist => {
-            //if it exist we are returning an error message
-            if (email_exist) {
+exports.resetPassword = (req, res, next) => {
+    var new_pass = randomstring.generate({length:12});
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(new_pass, salt, (err, hash) => {
+            if (err) {
+                return res.status(500)
+                    .json(vm.ApiResponse(false, 500, "server error"))
+            }
+            RegisterModel.findOneAndUpdate({email: req.body.email}, {password: hash}, function(err, result) {
+                if (err) {
+                    return res.status(500)
+                        .json(vm.ApiResponse(false, 500, "server error"))
+                }
+
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
                 const msg = {
                     to: req.body.email,
                     from: 'recovery@em3320.jd2f.aleccoder.space',
-                    subject: 'Recover your password!',
-                    text: 'Forgot your password? click this link to create a new one.\n' +
-                        'This is the place for the link',
-                    html: '<strong>Forgot your password? click this link to create a new one.</strong><br><br>' +
-                        '<a href="SomeLink' + '">Recover my password!</a>'
+                    subject: 'Your new password!',
+                    text: 'Here is your new password, we recommend changing it once you log in.\n' +
+                        new_pass,
+                    html: '<strong>Here is your new password, we recommend changing it once you log in.</strong><br><br>' +
+                        '<strong>' + new_pass + '</strong>'
                 };
                 (async () => {
                     try {
@@ -153,12 +162,9 @@ exports.recoverPassword = (req, res, next) => {
                 })();
                 return res.status(201)
                     .json(vm.ApiResponse(true, 201, "forgot password link sent"));
-            }
-            else {
-                return res.status(409)
-                    .json(vm.ApiResponse(false, 409, "Email not found!"));
-            }
-        });
+            })
+        })
+    })
 }
 
 //find a user by id

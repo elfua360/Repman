@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/users", user_controller.find);
 router.get("/delete/:id", user_controller.deleteOne);
 router.get("/resend/:id", user_controller.resendVerification);
-router.post("/reset", user_controller.recoverPassword);
+router.post("/resetpassword", user_controller.resetPassword);
 router.post("/changepassword", user_controller.changePassword)
 
 module.exports = router;
