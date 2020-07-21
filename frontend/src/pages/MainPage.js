@@ -1,17 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import Search from '../components/Search';
-import PageTitle from '../components/PageTitle'
+import Search from '../components/Search'
+
+import CreateRecipe from '../components/CreateRecipe'
 
 const MainPage = () => {
     return (
         <>
             <div>
-                <PageTitle/>
                 <Search/>
+                <CreateRecipe/>
             </div>
         </>
-    );
-};
+    )
+}
 
 export default MainPage;
