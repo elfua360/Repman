@@ -13,22 +13,20 @@ function Login() {
         var xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
-        try{
-            xhr.addEventListener("readystatechange", function() {
-                if(this.readyState === 4) {
-                    if (this.status === 200){
+        try {
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    if (this.status === 200) {
                         document.getElementById("loginError").className = "alert alert-success";
                         document.getElementById("loginError").innerHTML = "Login successful";
                         // TODO: redirect to main page on successful login
-                    }
-                    else{
+                    } else {
                         document.getElementById("loginError").className = "alert alert-danger";
                         document.getElementById("loginError").innerHTML = "Error " + this.status + ": " + JSON.parse(xhr.responseText).message;
                     }
                 }
             });
-        }
-        catch(err){
+        } catch (err) {
             document.getElementById("loginError").className = "alert alert-danger";
             document.getElementById("loginError").innerHTML = err.message;
         }
@@ -49,14 +47,7 @@ function Login() {
                 <Form.Group controlId="loginPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password"/>
-                    {/*<Form.Text className="as">
-                        <Button variant="link" className="forget-pass">Forget Password</Button>
-                        <br/>
-                    </Form.Text>*/}
                 </Form.Group>
-                {/*<Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out"/>
-                </Form.Group>*/}
                 <Button variant="primary" type="submit">
                     Login
                 </Button>
