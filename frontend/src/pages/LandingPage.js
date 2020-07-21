@@ -28,7 +28,6 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div className="Header">
-                <h1 className="header">Repman</h1>
                 <br/>
                 <Nav
                     variant="tabs"
