@@ -1,0 +1,3 @@
+curl -X POST -H 'Content-type: application/json' --data '{"email":"me@me.me","password":"sunmethodus"}' https://127.0.0.1:3001/api/login -v
+curl -X POST -H 'Content-type: application/json' --data '{"email":"me@me.me","password":"sunmethodus"}' http://127.0.0.1:3001/api/register -v
+curl -X POST -H 'Content-type: application/json' --data '{"id":"me@me.me","password":"sunmethodus1"}' http://127.0.0.1:3001/api/chagepassword -v
