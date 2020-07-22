@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 
-function PageTitle
+function PageTitle()
 {
   return(
     <h1 id="topTitleBanner">Repman</h1>
     
-  );
-};
-export default PageTitle;
+  )
+}
+export default PageTitle
