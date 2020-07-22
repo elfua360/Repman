@@ -7,4 +7,5 @@ router.get("/recipes/list", recipe_controller.find);
 router.post("/recipes/add", recipe_controller.create);
 router.delete("/recipes/delete", recipe_controller.delete);
 router.put("/recipes/update", recipe_controller.update);
+router.get("/recipes/search", recipe_controller.search);
 module.exports = router;

@@ -97,3 +97,31 @@ exports.update = (req, res, next) => {
 };
 
 
+exports.search = (req, res, next) => {
+
+    // left anchored regex partial search. 
+    let query = req.body.query
+    let requery = '^' + query
+    RecipeModel.find({
+        $and: [
+                {owner_id: req.body.owner_id},
+                {$or: [
+                    {name: {$regex: requery, $options: 'i'} },
+                    {tags: {$elemMatch: {$regex: requery, $options: 'i'}} }
+                    ]}
+            ]
+
+    })
+        .then(result => {
+            return res.status(201)
+                .json(vm.ApiResponse(true, 201, result));
+        })
+        .catch(error=> {
+                return res.status(500)
+                    .json(vm.ApiResponse(false, 500, error));
+            }
+        )
+
+};
+
+
