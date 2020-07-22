@@ -99,7 +99,7 @@ exports.update = (req, res, next) => {
 
 exports.search = (req, res, next) => {
 
-    // left anchored regex partial search. 
+    // left anchored regex partial search.
     let query = req.body.query
     let requery = '^' + query
     RecipeModel.find({
@@ -111,7 +111,9 @@ exports.search = (req, res, next) => {
                     ]}
             ]
 
-    })
+    }, null, {limit: req.body.limit})
+        .sort({name: 1})
+        .limit(req.body.limit)
         .then(result => {
             return res.status(201)
                 .json(vm.ApiResponse(true, 201, result));
