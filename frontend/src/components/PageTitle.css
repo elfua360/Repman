@@ -1,0 +1,11 @@
+#title-container {
+    background-color: #0081a2;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+}
+
+#topTitleBanner {
+    padding-left: 0.2em;
+    font-weight: bold;
+    font-family: "Arial Black";
+}

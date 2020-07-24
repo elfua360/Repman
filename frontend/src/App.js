@@ -9,12 +9,20 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: true
+            isLoggedIn: true,
+            authToken: null
         }
+
+
+
+    }
+    authTokenHandler() {
+        return this.state.authToken;
     }
 
     router = () => {
         if(this.state.isLoggedIn){
+        // if (this.state.isLoggedIn && authToken) {
             return (
             <>
                 <PageTitle/>
@@ -31,7 +39,7 @@ class App extends React.Component {
             </>
             )
         }
-    }
+    };
 
     render() {
         return (

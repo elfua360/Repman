@@ -45,12 +45,20 @@ class MainPage extends React.Component {
     localStorage.setItem('recipes', JSON.stringify(recipes));
     this.setState({recipes: recipes, currentlyEditing: 0});
   }
+  headerText(){
+    if(this.state.recipes.length){
+      return "All saved recipes"
+    }else{
+      return "No recipe found, add new ones to get started"
+    }
+  }
   render() {
     const recipes = this.state.recipes;
     var currentlyEditing = this.state.currentlyEditing;
+
     return(
       <div className="jumbotron">
-        <h1>Recipe Manager</h1>
+        <h1 className="display-4">{this.headerText()}</h1>
         <ListGroup id="recipes">
           {recipes.map((recipe, index) => (
             <Card eventKey={index} key={index}>
@@ -81,6 +89,7 @@ class MainPage extends React.Component {
             </Card>
           ))}
         </ListGroup>
+        <br/>
         <Button bsStyle="primary" onClick={this.showAddModal}>Add Recipe</Button>
         <RecipeAdd onShow={this.state.showAdd} onAdd={this.addRecipe} onAddModal={this.showAddModal} />
       </div>
