@@ -1,23 +1,23 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {Modal,Button,Form} from 'react-bootstrap';
 
-class RecipeAdd extends React.Component {
+class RecipeAdd extends Component {
   constructor(props) {
     super(props);
     this.state = {name: "", ingredients: "",steps: ""};
-    this.handleRecipeNameChange = this.handleRecipeNameChange.bind(this);
-    this.handleRecipeIngredientsChange = this.handleRecipeIngredientsChange.bind(this);
-    this.handleRecipeStepsChange = this.handleRecipeStepsChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleIngredientsChange = this.handleIngredientsChange.bind(this);
+    this.handleStepsChange = this.handleStepsChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 	this.handleCancel = this.handleCancel.bind(this);
   }
-  handleRecipeNameChange(e) {
+  handleNameChange(e) {
     this.setState({name: e.target.value});
   }
-  handleRecipeIngredientsChange(e) {
+  handleIngredientsChange(e) {
     this.setState({ingredients: e.target.value});
   }
-  handleRecipeStepsChange(e) {
+  handleStepsChange(e) {
     this.setState({steps: e.target.value});
   }
   handleSubmit(e) {
@@ -51,15 +51,15 @@ class RecipeAdd extends React.Component {
         <Modal.Body>
           <Form.Group controlId="recipeName">
             <Form.Label>Recipe Name</Form.Label>
-            <Form.Control type="text" required onChange={this.handleRecipeNameChange} value={this.state.name} placeholder="Enter Recipe Name" />
+            <Form.Control type="text" required onChange={this.handleNameChange} value={this.state.name} placeholder="Enter Recipe Name" />
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control componentClass="textarea" type="text" required onChange={this.handleRecipeIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
+            <Form.Control componentClass="textarea" type="text" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
-            <Form.Control componentClass="textarea" type="text" required onChange={this.handleRecipeStepsChange} value={this.state.steps} placeholder="separate by commas" />
+            <Form.Control componentClass="textarea" type="text" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas" />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>

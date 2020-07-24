@@ -11,7 +11,7 @@ class RecipeEdit extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
-  static getDerivedStateFromProps(props, state) {
+  static derivedState(props, state) {
     const prevName = state.prevName;
     const prevIngredients = state.prevIngredients;
     const prevSteps = state.prevSteps;
