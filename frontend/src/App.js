@@ -9,7 +9,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: true,
+            isLoggedIn: false,
             authToken: null
         }
 
@@ -26,6 +26,7 @@ class App extends React.Component {
             return (
             <>
                 <PageTitle/>
+                <Search/>
                 <MainPage/>
              </>
              )
@@ -33,8 +34,6 @@ class App extends React.Component {
         else{
             return (
             <>
-                <PageTitle/>
-                <Search/>
                 <LandingPage/>
             </>
             )

@@ -1,0 +1,10 @@
+body {
+    background-image: url('Home-Hero.jpg');
+    margin: 0;
+}
+
+#landing {
+    background-color: #ffffff;
+    text-align: center;
+    margin: 25px 35%;
+}

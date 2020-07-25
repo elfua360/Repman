@@ -22,7 +22,7 @@ function Login() {
                         // TODO: redirect to main page on successful login
                     } else {
                         document.getElementById("loginError").className = "alert alert-danger";
-                        document.getElementById("loginError").innerHTML = "Error " + this.status + ": " + JSON.parse(xhr.responseText).message;
+                        document.getElementById("loginError").innerHTML = "Error " + this.status + ": ";
                     }
                 }
             });

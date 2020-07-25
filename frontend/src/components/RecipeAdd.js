@@ -55,11 +55,11 @@ class RecipeAdd extends Component {
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control componentClass="textarea" type="text" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
+            <Form.Control as="textarea" type="text"  rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
-            <Form.Control componentClass="textarea" type="text" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas" />
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas" />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>

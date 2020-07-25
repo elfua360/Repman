@@ -4,7 +4,7 @@ import Login from '../components/Login';
 import Register from '../components/Register';
 import ForgotPassword from '../components/ForgotPassword'
 import Nav from "react-bootstrap/Nav";
-
+import './LandingPage.css';
 
 class LandingPage extends React.Component {
     constructor(props) {
@@ -27,7 +27,8 @@ class LandingPage extends React.Component {
 
     render() {
         return (
-            <div className="Header">
+            <div className="Header" id="landing">
+                <h1 className="display-4">Repman</h1>
                 <br/>
                 <Nav
                     variant="tabs"
