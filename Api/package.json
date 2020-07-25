@@ -27,6 +27,7 @@
     "express-session": "^1.17.1",
     "pug": "2.0.0-beta11",
     "@sendgrid/mail": "^7.2.1",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "qrcode": "^1.4.4"
   }
 }

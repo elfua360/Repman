@@ -12,12 +12,8 @@ function CreateRecipe(){
                         <Form.Control type="text" placeholder="Enter Recipe Name"/>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Prep Time</Form.Label>
+                        <Form.Label>Time Required</Form.Label>
                         <Form.Control type="text" placeholder="ex 10min"/>
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Cook Time</Form.Label>
-                        <Form.Control type="text" placeholder="ex 30min"/>
                     </Form.Group>
                     <Form.Group>
                          <Form.Label>Ingredients</Form.Label>
