@@ -87,8 +87,8 @@ class MainPage extends React.Component {
                 </ListGroup.Item>
                 </ListGroup>
                 <ButtonToolbar>
-                  <Button bsStyle="warning" onClick={() => {this.showEditModal(index)}}>Edit</Button>
-                  <Button bsStyle="danger" onClick={() => {this.deleteRecipe(index)}}>Delete</Button>
+                  <Button variant="warning" onClick={() => {this.showEditModal(index)}}>Edit</Button>
+                  <Button variant="danger" onClick={() => {this.deleteRecipe(index)}}>Delete</Button>
                 </ButtonToolbar>
               </Card.Body>
               <RecipeEdit onShow={this.state.showEdit} onEdit={this.editRecipe} onEditModal={() => {this.showEditModal(currentlyEditing)}} currentlyEditing={currentlyEditing} recipe={recipes[currentlyEditing]} />
@@ -96,7 +96,7 @@ class MainPage extends React.Component {
           ))}
         </ListGroup>
         <br/>
-        <Button bsStyle="primary" onClick={this.showAddModal}>Add Recipe</Button>
+        <Button variant="primary" onClick={this.showAddModal}>Add Recipe</Button>
         <RecipeAdd onShow={this.state.showAdd} onAdd={this.addRecipe} onAddModal={this.showAddModal} />
       </div>
     );
