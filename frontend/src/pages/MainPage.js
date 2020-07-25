@@ -2,7 +2,7 @@ import React from 'react';
 import {Card,Button, ButtonToolbar, ListGroup} from 'react-bootstrap';
 import RecipeAdd from '../components/RecipeAdd';
 import RecipeEdit from '../components/RecipeEdit';
-
+import './MainPage.css';
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
@@ -77,6 +77,12 @@ class MainPage extends React.Component {
                 <ListGroup.Item>
                   {recipe.steps.map((steps, index) => (
                     <ListGroup.Item key={index}>{steps}</ListGroup.Item>
+                  ))}
+                </ListGroup.Item>
+                <Card.Title>Tags</Card.Title>
+                <ListGroup.Item>
+                  {recipe.tags.map((tags, index) => (
+                      <ListGroup.Item key={index}>{tags}</ListGroup.Item>
                   ))}
                 </ListGroup.Item>
                 </ListGroup>

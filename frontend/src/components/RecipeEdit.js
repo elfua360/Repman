@@ -8,6 +8,7 @@ class RecipeEdit extends React.Component {
     this.handleRecipeNameChange = this.handleRecipeNameChange.bind(this);
     this.handleRecipeIngredientsChange = this.handleRecipeIngredientsChange.bind(this);
     this.handleRecipeStepsChange = this.handleRecipeStepsChange.bind(this);
+    this.handleRecipeTagsChange = this.handleRecipeTagsChange.bind(this);
     this.handleEdit = this.handleEdit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
@@ -33,6 +34,9 @@ class RecipeEdit extends React.Component {
   handleRecipeStepsChange(e) {
     this.setState({steps: e.target.value});
   }
+  handleRecipeTagsChange(e) {
+    this.setState({tags: e.target.value});
+  }
   handleEdit(e) {
     e.preventDefault();
     const onEdit = this.props.onEdit;
@@ -41,7 +45,8 @@ class RecipeEdit extends React.Component {
     var name = this.state.name;
     var ingredients = this.state.ingredients.split(regExp);
     var steps = this.state.steps.split(regExp);
-    onEdit(name, ingredients, steps, currentlyEditing);
+    var tags = this.state.tags.split(regExp);
+    onEdit(name, ingredients, steps, tags, currentlyEditing);
   }
   handleCancel() {
     const onEditModal = this.props.onEditModal;
@@ -54,8 +59,10 @@ class RecipeEdit extends React.Component {
     var regex1 = /^\S/;
     var regex2 = /^[^,\s]/;
 	var regex3 = /[^,\s]$/;
-    const validRecipe = regex1.test(this.state.name) && regex2.test(this.state.ingredients) && regex3.test(this.state.ingredients)
-    && regex2.test(this.state.steps) && regex3.test(this.state.steps);
+    const validRecipe = regex1.test(this.state.name)
+        && regex2.test(this.state.ingredients) && regex3.test(this.state.ingredients)
+        && regex2.test(this.state.steps) && regex3.test(this.state.steps)
+        && regex2.test(this.state.tags) && regex3.test(this.state.tags);
     return(
       <Modal show={onShow} onHide={this.handleCancel}>
         <Modal.Header closeButton>
@@ -73,6 +80,11 @@ class RecipeEdit extends React.Component {
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
             <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleRecipeStepsChange} value={this.state.steps} placeholder="separate by commas"/>
+          </Form.Group>
+          <Form.Group controlId="tags">
+            <Form.Label>Tags</Form.Label>
+            <Form.Control as="textarea" type="text" rows="1" required onChange={this.handleRecipeTagsChange}
+                          value={this.state.tags} placeholder="separate by commas"/>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>

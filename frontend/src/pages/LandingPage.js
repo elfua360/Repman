@@ -27,32 +27,33 @@ class LandingPage extends React.Component {
 
     render() {
         return (
-            <div className="Header" id="landing">
-                <h1 className="display-4">Repman</h1>
-                <br/>
-                <Nav
-                    variant="tabs"
-                    onSelect={(selectedKey) => {
-                        this.setState(() => {
-                            return {page: selectedKey};
-                        })
-                    }}
-                    className="navigation"
-                    defaultActiveKey="login"
-                >
-                    <Nav.Item>
-                        <Nav.Link eventKey="login">Login</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="register">Register</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="forgotPassword">Forgot Password</Nav.Link>
-                    </Nav.Item>
-                </Nav>
-                <br/>
-                {this.router()}
-
+            <div id="landing-body">
+                <div className="Header" id="landing">
+                    <h1 className="display-4">Repman</h1>
+                    <br/>
+                    <Nav
+                        variant="tabs"
+                        onSelect={(selectedKey) => {
+                            this.setState(() => {
+                                return {page: selectedKey};
+                            })
+                        }}
+                        className="navigation"
+                        defaultActiveKey="login"
+                    >
+                        <Nav.Item>
+                            <Nav.Link eventKey="login">Login</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="register">Register</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link eventKey="forgotPassword">Forgot Password</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                    <br/>
+                    {this.router()}
+                </div>
             </div>)
     }
 };
