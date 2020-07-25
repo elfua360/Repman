@@ -28,6 +28,7 @@
     "pug": "2.0.0-beta11",
     "@sendgrid/mail": "^7.2.1",
     "randomstring": "^1.1.5",
-    "qrcode": "^1.4.4"
+    "qrcode": "^1.4.4",
+    "express-jwt": "^6.0.0"
   }
 }

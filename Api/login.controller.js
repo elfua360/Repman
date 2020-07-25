@@ -5,6 +5,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const vm = require("v-response");
+const jwtDecode = require("express-jwt");
 const RegisterModel = require('./register.model');
 
 exports.login = (req, res, next) => {
@@ -41,7 +42,7 @@ exports.login = (req, res, next) => {
 
 };
 
-exports.logout = (req, res, next) => {
+/*exports.logout = (req, res, next) => {
  //   console.log('before');
   //  console.log(req.session);
     req.session.destroy((err) => {
@@ -51,15 +52,32 @@ exports.logout = (req, res, next) => {
         console.log(req.session);
         res.send("Logged out successfully");
     });
-}
+}*/
 
 exports.authCheck = (req, res, next) => {
-    const sessUser = req.session.user;
-    if (sessUser) {
-        return res.json({ msg: " Authenticated Successfully", sessUser });
-    }
-    else {
-        return res.status(401).json({ msg: "Unauthorized" });
-    }
+    //const sessUser = req.session.user;
+    jwt.verify(req.body.token, 'keys', function(err, decoded) {
+        if (err) {
+            return res.status(500)
+                .json(vm.ApiResponse(false, 500, err));
+        }
+        console.log(decoded.id); // bar
+        RegisterModel.findOne({_id:decoded.id})
+            .then(user => {
+                if (!user) {
+                    return res.status(500)
+                        .json(vm.ApiResponse(false, 409, "unable to verify user"));
+                }
+                else {
+                    return res.status(200)
+                        .json(vm.ApiResponse(true, 200, "user found", {
+                            first_name: user.first_name,
+                            last_name: user.last_name,
+                            email: user.email,
+                            user_id: user._id
+                        }));
+                }
+            })
+    });
 
 }
