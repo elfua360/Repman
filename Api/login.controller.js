@@ -26,7 +26,7 @@ exports.login = (req, res, next) => {
                     const sessionUser = {id: user.id, email: user.email};
                     req.session.user = sessionUser;
                     //console.log(req.session);
-                    return res.status(200).json({ msg: " Logged In Successfully", sessionUser});
+                    return res.status(200).json(vm.ApiResponse(true, 200,{ msg: " Logged In Successfully", sessionUser}));
                       //  const payload = {id: user.id};
                         /*jwt.sign(payload, "keys", {expiresIn: "365d"}, (error, token) => {
                             return res.status(200)
