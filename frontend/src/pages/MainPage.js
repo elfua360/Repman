@@ -32,9 +32,9 @@ class MainPage extends React.Component {
     this.setState({recipes: recipes});
     this.showAddModal();
   }
-  editRecipe(newName, newIngredients, newSteps, currentlyEditing) {
+  editRecipe(newName, newIngredients, newSteps, newTags, currentlyEditing) {
     let recipes = this.state.recipes;
-    recipes[currentlyEditing] = {name: newName, ingredients: newIngredients, steps: newSteps};
+    recipes[currentlyEditing] = {name: newName, ingredients: newIngredients, steps: newSteps, tags: newTags};
     localStorage.setItem('recipes', JSON.stringify(recipes));
     this.setState({recipes: recipes});
     this.showEditModal(currentlyEditing);
