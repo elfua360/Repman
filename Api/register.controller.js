@@ -63,8 +63,21 @@ exports.create = async (req, res, next) => {
                                     })();
                                     VerificationModel.deleteOne({user_id:new_verify._id});
                                 });
-                                return res.status(201)
-                                    .json(vm.ApiResponse(true, 201, "registration successful", saved));
+                                const payload = {id: saved._id};
+                                console.log("HERE");
+                                jwt.sign(payload, "keys", {expiresIn: "365d"}, (error, token) => {
+                                    if (error) {
+                                        console.error(error);
+                                    }
+                                   // console.log(token);
+                                    return res.status(200)
+                                        .json(vm.ApiResponse(true, 200, "Registration successful", {
+                                            user: saved,
+                                            token: token
+                                        }));
+                                });
+                               /* return res.status(201)
+                                    .json(vm.ApiResponse(true, 201, "registration successful", saved));*/
                             }
                         }).catch(error => {
                         return res.status(500)
