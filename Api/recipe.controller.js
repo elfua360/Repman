@@ -48,10 +48,14 @@ exports.qrcode = (req, res, next) => {
 
             }
            // console.log(result.steps.length);
-            var steps = [];
+           /* JSONObject jObject = new JSONObject(barcode.displayValue);
+            JSONArray blah = jObject.getJSONArray("steps");
+            for(int i=blah.length()-1;i>=0;i--){
+                JSONObject step = blah.getJSONObject(i);*/
+            var steps = {"steps": []};
             for (var i = 0; i < result.steps.length; i++) {
                // steps.push((i+1) + ". " + result.steps[i].step + "\n");
-                steps[i] = {"step" : result.steps[i].step};
+                steps["steps"][i] = {"steps" : result.steps[i].step};
             }
             console.log(JSON.stringify(steps));
            // const payload = JSON.parse(steps);
