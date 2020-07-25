@@ -44,7 +44,7 @@ class RecipeAdd extends Component {
 
     handleCancel() {
         const onAddModal = this.props.onAddModal;
-        this.setState({name: "", ingredients: "", steps: ""});
+        this.setState({name: "", ingredients: "", steps: "", tags: ""});
         onAddModal();
     }
 
