@@ -17,9 +17,9 @@ class LandingPage extends React.Component {
     router = () => {
         console.log(this.state.page)
         if (this.state.page === "login") {
-            return <Login/>;
+            return <Login onLogin={this.props.onLogin}/>;
         } else if (this.state.page === "register") {
-            return <Register/>;
+            return <Register onLogin={this.props.onRegisterLogin}/>;
         } else if (this.state.page === "forgotPassword") {
             return <ForgotPassword/>;
         }
