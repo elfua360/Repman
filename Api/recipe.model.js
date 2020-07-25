@@ -8,7 +8,7 @@ const recipeSchema = new Schema({
         required: true
     },
     owner_id: {
-        type: Number,
+        type: String,
         required: true
     },
     ingredients: [
