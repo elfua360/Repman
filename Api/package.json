@@ -30,5 +30,6 @@
     "randomstring": "^1.1.5",
     "qrcode": "^1.4.4",
     "express-jwt": "^6.0.0"
-  }
+  },
+ "scripts": { "test": "bash ../unittest.sh" } 
 }
