@@ -24,6 +24,7 @@ stages:
 testapi:
   stage: test
   script:
+  - cd Api 
   - npm i npm@latest -g
   - npm i
   - npm test
