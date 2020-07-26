@@ -36,14 +36,19 @@ class MainPage extends React.Component {
     showEditModal(index) {
         this.setState({currentlyEditing: index, showEdit: !this.state.showEdit});
     }
-
+    refreshList = () => {
+        this.setState({recipes:[]});
+        this.getRemoteRecipe();
+    };
+    addRecipeAfter = () => {
+        this.showAddModal();
+        this.refreshList();
+    }
     addRecipe(recipe) {
         let recipes = this.state.recipes;
         recipes.push(recipe);
         localStorage.setItem('recipes', JSON.stringify(recipes));
         this.setState({recipes: recipes});
-        this.setState({allRecipe: recipes});
-        this.showAddModal();
     }
 
     editRecipe(newName, newIngredients, newSteps, newTags, currentlyEditing) {
@@ -110,11 +115,11 @@ class MainPage extends React.Component {
             let recipe = recipes[i];
             let ingredients = [];
             recipe.ingredients.forEach((val, idx) => {
-                ingredients.push(val.amount + " " + val.name);
+                ingredients.push({amount: val.amount, name: val.name});
             });
             let steps = [];
             recipe.steps.forEach((val, idx) => {
-                steps.push(val.number + ". " + val.step);
+                steps.push({number:val.number, step:val.step});
             });
             let tags = [];
             recipe.tags.forEach((val, idx) => {
@@ -129,7 +134,6 @@ class MainPage extends React.Component {
             };
             console.log(rec);
             this.addRecipe(rec);
-            this.showAddModal();
         }
     };
 
@@ -166,14 +170,16 @@ class MainPage extends React.Component {
                                     <ListGroup>
                                         <Card.Title>Ingredients</Card.Title>
                                         <ListGroup.Item>
-                                            {recipe.ingredients.map((ingredient, index) => (
-                                                <ListGroup.Item key={index}>{ingredient}</ListGroup.Item>
+                                            {console.log(recipe)}
+                                            {
+                                                recipe.ingredients.map((ingredient, index) => (
+                                                <ListGroup.Item key={index}>{(ingredient.amount + 1) + " " + ingredient.name}</ListGroup.Item>
                                             ))}
                                         </ListGroup.Item>
                                         <Card.Title>Steps</Card.Title>
                                         <ListGroup.Item>
                                             {recipe.steps.map((steps, index) => (
-                                                <ListGroup.Item key={index}>{steps}</ListGroup.Item>
+                                                <ListGroup.Item key={index}>{(steps.number + 1) + " " + steps.step}</ListGroup.Item>
                                             ))}
                                         </ListGroup.Item>
                                         <Card.Title>Tags</Card.Title>
@@ -201,7 +207,7 @@ class MainPage extends React.Component {
                     </ListGroup>
                     <br/>
                     <Button variant="primary" onClick={this.showAddModal}>Add Recipe</Button>
-                    <RecipeAdd browserState={this.props.browserState} onShow={this.state.showAdd} onAdd={this.addRecipe} onAddModal={this.showAddModal}/>
+                    <RecipeAdd browserState={this.props.browserState} onShow={this.state.showAdd} onAdd={this.addRecipeAfter} onAddModal={this.showAddModal}/>
                 </div>
             </div>
 

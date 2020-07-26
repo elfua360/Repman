@@ -33,18 +33,37 @@ class   RecipeAdd extends Component {
         e.preventDefault();
         const onAdd = this.props.onAdd;
         const regExp = /\s*,\s*/;
+        const regExpIngredients = /\s*:\s*/;
         const ownerId = this.props.browserState.ownerId;
         var newName = this.state.name;
         var newIngredients = this.state.ingredients.split(regExp);
         var newSteps = this.state.steps.split(regExp);
         var newTags = this.state.tags.split(regExp);
+        var steps = [];
+        var ingredients = [];
+        console.log(newSteps, newIngredients);
+        for(let i = 0; i < newSteps.length; i++){
+            let step = {};
+            step["step"] = newSteps[i];
+            step["number"] = i;
+            steps.push(step);
+        }
+        for(let i = 0; i < newIngredients.length; i++){
+            let ingredient = {};
+            let newIngrd = newIngredients[i].split(regExpIngredients);
+            ingredient["name"] = (newIngrd.length === 1) ? newIngrd[0]:newIngrd[1];
+            ingredient["amount"] = (newIngrd.length === 1) ? 1:newIngrd[0];
+            ingredients.push(ingredient);
+        }
+
         const jsonPayload = JSON.stringify({
             "name": newName,
             "owner_id": ownerId,
-            "ingredients": newIngredients,
-            "steps": newSteps,
+            "ingredients": ingredients,
+            "steps": steps,
             "tags": newTags
         });
+
         console.log(jsonPayload);
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
@@ -53,7 +72,7 @@ class   RecipeAdd extends Component {
             xhr.addEventListener("load", function () {
                 if (this.status === 200 || this.status === 201) {
                     setTimeout(() => {
-                        onAdd(jsonPayload); // Does this need to be the jsonPayload or the xhr.responseText?
+                        onAdd(); // Does this need to be the jsonPayload or the xhr.responseText?
                     }, 1500);
                 }
                 else{
@@ -100,7 +119,7 @@ class   RecipeAdd extends Component {
                         <Form.Label>Recipe Ingredients</Form.Label>
                         <Form.Control as="textarea" type="text" rows="3" required
                                       onChange={this.handleIngredientsChange} value={this.state.ingredients}
-                                      placeholder="separate by commas"/>
+                                      placeholder="e.g: 1 cup : flour, 2 tsp : sugar ... etc"/>
                     </Form.Group>
                     <Form.Group controlId="recipeSteps">
                         <Form.Label>Recipe Steps</Form.Label>
