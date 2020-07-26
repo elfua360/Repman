@@ -16,13 +16,29 @@ class Search extends React.Component {
             "query": query,
             "limit": 50
         });
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        alert(jsonPayload); // DELETEME
 
         try{
-
+            xhr.addEventListener("load", function () {
+                if (this.status === 200 || this.status === 201) {
+                    setTimeout(() => {
+                        this.props.onSearch(this.responseText)
+                    }, 1500);
+                }
+                else{
+                    alert("Error " + this.status + ": " + this.responseText); // TODO: make error messaging better
+                }
+            });   
         } catch (err){
-            
+            alert(err.message);
         }
-        this.props.onSearch(query);
+
+        xhr.open("POST", "https://jd2.aleccoder.space/api/recipe/search")
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.send(jsonPayload);
+        event.preventDefault();
     };
     render() {
         return (
