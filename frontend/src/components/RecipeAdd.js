@@ -38,8 +38,30 @@ class   RecipeAdd extends Component {
         var newSteps = this.state.steps.split(regExp);
         var newTags = this.state.tags.split(regExp);
         var newRecipe = {name: newName, ingredients: newIngredients, steps: newSteps, tags: newTags};
-        onAdd(newRecipe);
-        console.log(JSON.stringify(newRecipe));
+        
+        const jsonPayload = JSON.stringify(newRecipe);
+        console.log(jsonPayload);
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        try{
+            xhr.addEventListener("load", function () {
+                if (this.status === 200 || this.status === 201) {
+                    setTimeout(() => {
+                        onAdd(jsonPayload); // Does this need to be the jsonPayload or the xhr.responseText?
+                    }, 1500);
+                }
+                else{
+                    alert("Error " + this.status + ": " + this.responseText); // TODO: make error messaging better
+                }
+            });
+        } catch (err){
+            alert(err.message);
+        }
+
+        xhr.open("POST", "https://jd2.aleccoder.space/api/recipes/add")
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.send(jsonPayload);
         this.setState({name: "", ingredients: "", steps: "", tags: ""});
     }
 
