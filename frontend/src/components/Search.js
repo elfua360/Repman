@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import {Navbar} from 'react-bootstrap'
+import {Navbar, FormControl} from 'react-bootstrap'
 
 
 class Search extends React.Component {
@@ -45,7 +45,7 @@ class Search extends React.Component {
             <div id="search-container">
                 <Navbar>
                     <Form inline>
-                        <Form.Control type="text" placeholder="Search" id="search"/>
+                        <FormControl type="text" placeholder="Search" id="search"/>
                         <Button variant="primary" onClick={this.doSearch}>Search</Button>
                         <Button variant="primary" style={{position: "absolute", right: "0"}}
                                 onClick={this.doLogout}> Log Out </Button>
