@@ -31,7 +31,7 @@ function ForgotPassword() {
             document.getElementById("resetError").innerHTML = err.message;
         }
 
-        xhr.open("POST", "https://jd2.aleccoder.space/api/reset");
+        xhr.open("POST", "https://jd2.aleccoder.space/api/resetpassword");
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhr.send(jsonPayload);
         event.preventDefault();
