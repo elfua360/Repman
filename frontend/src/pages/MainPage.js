@@ -104,12 +104,10 @@ class MainPage extends React.Component {
     }
 
     headerText() {
-        var recipe = JSON.parse(localStorage.getItem("recipes"));
+        // var recipe = JSON.parse(localStorage.getItem("recipes"));
         if (this.state.recipes.length) {
             return "All saved recipes"
-        } else if(recipe.length){
-            return "Nothing found :((";
-        }else {
+        } else {
             return "No recipe found, add new ones to get started"
         }
     }
@@ -145,6 +143,7 @@ class MainPage extends React.Component {
 
     parseRemoteRecipe = (json) => {
         const recipes = json.message;
+        console.log(recipes);
         for(let i = 0; i < recipes.length; i++){
             let recipe = recipes[i];
             let ingredients = [];
@@ -168,7 +167,6 @@ class MainPage extends React.Component {
             };
             console.log(rec);
             this.addRecipe(rec);
-            this.showAddModal();
         }
     };
     render() {
@@ -223,6 +221,7 @@ class MainPage extends React.Component {
                                 }} currentlyEditing={currentlyEditing} recipe={recipes[currentlyEditing]}/>
                             </Card>
                         ))}
+                        <br/>
                     </ListGroup>
                     <br/>
                     <Button variant="primary" onClick={this.showAddModal}>Add Recipe</Button>
