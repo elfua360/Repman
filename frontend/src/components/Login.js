@@ -23,7 +23,7 @@ class Login extends React.Component {
                         // TODO: redirect to main page on successful login
                     } else {
                         document.getElementById("loginError").className = "alert alert-danger";
-                        document.getElementById("loginError").innerHTML = "Error " + this.status + ": ";
+                        document.getElementById("loginError").innerHTML = "Error " + this.status + ": " + this.responseText;
                     }
                 }
             });
@@ -32,13 +32,13 @@ class Login extends React.Component {
                 setTimeout(() => {
                     login(payload)
                 }, 1500);
-            })
+            });
         } catch (err) {
             document.getElementById("loginError").className = "alert alert-danger";
             document.getElementById("loginError").innerHTML = err.message;
         }
 
-        xhr.open("POST", "https://jd2.aleccoder.space/api/login")
+        xhr.open("POST", "https://jd2.aleccoder.space/api/login");
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhr.send(jsonPayload);
         event.preventDefault(); // TODO: redirect on successful login

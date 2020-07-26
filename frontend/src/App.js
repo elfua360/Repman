@@ -24,7 +24,15 @@ class App extends React.Component {
     getUserData = () => {
         return this.state;
     };
-
+    doLogout = () => {
+        this.setState({
+            isLoggedIn: false,
+            ownerId: null,
+            firstName: null,
+            lastName: null,
+            authToken: null
+        });
+    }
     doLogin = (data) => {
         const jsonData = JSON.parse(data)["data"];
         const userData = jsonData.user;
@@ -48,22 +56,19 @@ class App extends React.Component {
             authToken: null
         });
     };
-    doLogout = () => {
-        this.setState({});
-    };
     router = () => {
         if (this.state.isLoggedIn) {
             return (
                 <>
                     <PageTitle/>
-                    <Search/>
+                    <Search onLogout={this.doLogout}/>
                     <MainPage/>
                 </>
             )
         } else {
             return (
                 <>
-                    <LandingPage onLogin={this.doLogin} onRegisterLogin={this.doLoginRegister}/>
+                    <LandingPage onLogin={this.doLogin} onRegisterLogin={this.doLoginRegister} />
                 </>
             )
         }
