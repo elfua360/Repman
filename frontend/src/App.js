@@ -60,7 +60,7 @@ class App extends React.Component {
             return (
                 <>
                     <PageTitle/>
-                    <MainPage onLogout={this.doLogout} userData={this.getUserData}/>
+                    <MainPage browserState={this.getUserData()} onLogout={this.doLogout}/>
                 </>
             )
         } else {

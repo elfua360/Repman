@@ -115,7 +115,7 @@ class MainPage extends React.Component {
     }
 
     getRemoteRecipe = () => {
-        var info = this.props.userData();
+        var info = this.props.browserState();
         console.log(info);
         const jsonPayload = JSON.stringify({
             "owner_id": info.ownerId,
@@ -177,7 +177,7 @@ class MainPage extends React.Component {
 
         return (
             <div>
-                <Search onLogout={this.props.onLogout} onSearch={this.searchAndSort}/>
+                <Search browserState={this.props.browserState} onLogout={this.props.onLogout} onSearch={this.searchAndSort}/>
                 <br/>
                 <div className="jumbotron">
 
