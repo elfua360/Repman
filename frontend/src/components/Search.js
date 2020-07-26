@@ -24,7 +24,8 @@ class Search extends React.Component {
             xhr.addEventListener("load", function () {
                 if (this.status === 200 || this.status === 201) {
                     setTimeout(() => {
-                        this.props.onSearch(this.responseText)
+                        console.log(this.responseText)
+                        // this.props.onSearch(this.responseText)
                     }, 1500);
                 }
                 else{

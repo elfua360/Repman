@@ -115,7 +115,7 @@ class MainPage extends React.Component {
     }
 
     getRemoteRecipe = () => {
-        var info = this.props.browserState();
+        var info = this.props.browserState;
         console.log(info);
         const jsonPayload = JSON.stringify({
             "owner_id": info.ownerId,
