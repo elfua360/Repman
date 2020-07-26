@@ -45,7 +45,7 @@ class   RecipeAdd extends Component {
         for(let i = 0; i < newSteps.length; i++){
             let step = {};
             step["step"] = newSteps[i];
-            step["number"] = i;
+            step["number"] = i + 1;
             steps.push(step);
         }
         for(let i = 0; i < newIngredients.length; i++){
