@@ -33,13 +33,18 @@ class   RecipeAdd extends Component {
         e.preventDefault();
         const onAdd = this.props.onAdd;
         const regExp = /\s*,\s*/;
+        const ownerId = this.props.browserState.ownerId;
         var newName = this.state.name;
         var newIngredients = this.state.ingredients.split(regExp);
         var newSteps = this.state.steps.split(regExp);
         var newTags = this.state.tags.split(regExp);
-        var newRecipe = {name: newName, ingredients: newIngredients, steps: newSteps, tags: newTags};
-        
-        const jsonPayload = JSON.stringify(newRecipe);
+        const jsonPayload = JSON.stringify({
+            "name": newName,
+            "owner_id": ownerId,
+            "ingredients": newIngredients,
+            "steps": newSteps,
+            "tags": newTags
+        });
         console.log(jsonPayload);
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;

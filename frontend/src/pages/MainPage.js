@@ -201,7 +201,7 @@ class MainPage extends React.Component {
                     </ListGroup>
                     <br/>
                     <Button variant="primary" onClick={this.showAddModal}>Add Recipe</Button>
-                    <RecipeAdd onShow={this.state.showAdd} onAdd={this.addRecipe} onAddModal={this.showAddModal}/>
+                    <RecipeAdd browserState={this.props.browserState} onShow={this.state.showAdd} onAdd={this.addRecipe} onAddModal={this.showAddModal}/>
                 </div>
             </div>
 
