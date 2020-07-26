@@ -11,6 +11,17 @@ class Search extends React.Component {
     };
     doSearch = () => {
         const query = document.getElementById("search").value;
+        const jsonPayload = JSON.stringify({
+            "owner_id": this.props.browserState.ownerId,
+            "query": query,
+            "limit": 50
+        });
+
+        try{
+
+        } catch (err){
+            
+        }
         this.props.onSearch(query);
     };
     render() {
@@ -18,7 +29,7 @@ class Search extends React.Component {
             <div id="search-container">
                 <Navbar>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" id="search"/>
+                        <Form.Control type="text" placeholder="Search" id="search"/>
                         <Button variant="primary" onClick={this.doSearch}>Search</Button>
                         <Button variant="primary" style={{position: "absolute", right: "0"}}
                                 onClick={this.doLogout}> Log Out </Button>
