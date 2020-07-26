@@ -147,7 +147,7 @@ exports.resetPassword = (req, res, next) => {
                     text: 'Here is your new password, we recommend changing it once you log in.\n' +
                         new_pass,
                     html: '<strong>Here is your new password, we recommend changing it once you log in.</strong><br><br>' +
-                        '<strong>' + new_pass + '</strong>'
+                        '<body>' + new_pass + '</body>'
                 };
                 (async () => {
                     try {
