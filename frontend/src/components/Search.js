@@ -1,7 +1,7 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import {Navbar, FormControl} from 'react-bootstrap'
+import {Navbar} from 'react-bootstrap'
 
 
 class Search extends React.Component {
@@ -9,7 +9,7 @@ class Search extends React.Component {
         const logout = this.props.onLogout;
         setTimeout(() => logout(), 1000)
     };
-    doSearch = () => {
+    doSearch = async event => {
         const query = document.getElementById("search").value;
         const jsonPayload = JSON.stringify({
             "owner_id": this.props.browserState.ownerId,
