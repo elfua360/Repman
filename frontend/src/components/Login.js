@@ -15,23 +15,18 @@ class Login extends React.Component {
         xhr.withCredentials = true;
 
         try {
-            xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    if (this.status === 200) {
-                        document.getElementById("loginError").className = "alert alert-success";
-                        document.getElementById("loginError").innerHTML = "Login successful";
-                        // TODO: redirect to main page on successful login
-                    } else {
-                        document.getElementById("loginError").className = "alert alert-danger";
-                        document.getElementById("loginError").innerHTML = "Error " + this.status + ": " + this.responseText;
-                    }
-                }
-            });
             xhr.addEventListener("load", function () {
-                var payload = this.responseText;
-                setTimeout(() => {
-                    login(payload)
-                }, 1500);
+                if (this.status === 200) {
+                    document.getElementById("loginError").className = "alert alert-success";
+                    document.getElementById("loginError").innerHTML = "Login successful";
+                    const payload = this.responseText;
+                    setTimeout(() => {
+                        login(payload)
+                    }, 1500);
+                } else {
+                    document.getElementById("loginError").className = "alert alert-danger";
+                    document.getElementById("loginError").innerHTML = "Error " + this.status + ": " + this.responseText;
+                }
             });
         } catch (err) {
             document.getElementById("loginError").className = "alert alert-danger";
