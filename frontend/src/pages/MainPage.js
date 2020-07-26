@@ -114,7 +114,7 @@ class MainPage extends React.Component {
         var currentlyEditing = this.state.currentlyEditing;
         return (
             <div>
-                <Search onLogout={this.props.onLogout} onSearch={this.searchAndSort}/>
+                <Search browserState={this.props.browserState} onLogout={this.props.onLogout} onSearch={this.searchAndSort}/>
                 <br/>
                 <div className="jumbotron">
 
