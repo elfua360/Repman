@@ -65,8 +65,8 @@ exports.authCheck = (req, res, next) => {
         RegisterModel.findOne({_id:decoded.id})
             .then(user => {
                 if (!user) {
-                    return res.status(500)
-                        .json(vm.ApiResponse(false, 409, "unable to verify user"));
+                    return res.status(409)
+                        .json(vm.ApiResponse(false, 409, "unable to verify user session"));
                 }
                 else {
                     return res.status(200)
