@@ -24,6 +24,7 @@ class MainPage extends React.Component {
     }
 
     searchAndSort = (query) => {
+        console.log("triggered");
         if (query === "") {
             console.log(localStorage.getItem("recipes"));
             this.setState({recipes: JSON.parse(localStorage.getItem("recipes"))});

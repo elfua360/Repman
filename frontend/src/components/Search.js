@@ -12,7 +12,6 @@ class Search extends React.Component {
     doSearch = () => {
         const query = document.getElementById("search").value;
         this.props.onSearch(query);
-        console.log(query);
     };
     render() {
         return (
