@@ -22,24 +22,20 @@ class Register extends React.Component {
 
         try {
             xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
-                    if (this.status === 200 || this.status === 201) {
-                        document.getElementById("registerError").className = "alert alert-success";
-                        document.getElementById("registerError").innerHTML = "Account successfully created. Wait to be redirected.";
-                    } else {
-                        document.getElementById("registerError").className = "alert alert-danger";
-                        document.getElementById("registerError").innerHTML = "Error " + this.status + ": " + this.responseText;
-                    }
-                }
-                xhr.addEventListener("load", function () {
-                    if (this.status === 200 || this.status === 201) {
-                        const payload = this.responseText;
-                        setTimeout(() => {
-                            login(payload)
-                        }, 1500);
-                    }
-                })
             });
+            xhr.addEventListener("load", function () {
+                if (this.status === 200 || this.status === 201) {
+                    document.getElementById("registerError").className = "alert alert-success";
+                    document.getElementById("registerError").innerHTML = "Account successfully created. Wait to be redirected.";
+                    const payload = this.responseText;
+                    setTimeout(() => {
+                        login(payload)
+                    }, 1500);
+                } else {
+                    document.getElementById("registerError").className = "alert alert-danger";
+                    document.getElementById("registerError").innerHTML = "Error " + this.status + ": " + this.responseText;
+                }
+            })
         } catch (err) {
             document.getElementById("registerError").className = "alert alert-danger";
             document.getElementById("registerError").innerHTML = err.message;
@@ -48,7 +44,7 @@ class Register extends React.Component {
         xhr.open("POST", "https://jd2.aleccoder.space/api/register")
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhr.send(jsonPayload);
-        event.preventDefault(); // TODO: figure out if this is necessary
+        event.preventDefault();
     };
 
     render() {
