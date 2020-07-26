@@ -16,7 +16,8 @@ class MainPage extends React.Component {
             recipes: [],
             showAdd: false,
             showEdit: false,
-            currentlyEditing: 0
+            currentlyEditing: 0,
+            searchMode: false
         };
 
         this.showAddModal = this.showAddModal.bind(this);
@@ -27,49 +28,6 @@ class MainPage extends React.Component {
 
         // this.addRecipe(JSON.parse("{\"name\":\"Spaghetti with Meat Sauce\",\"ingredients\":[\"1 pound lean ground meat like beef\",\"turkey\",\"chicken or lamb\",\"3 tablespoons olive oil\",\"1 cup (130 grams) chopped onion\",\"3 garlic cloves\",\"minced (1 tablespoon)\",\"2 tablespoons tomato paste\",\"1/2 teaspoon dried oregano\",\"Pinch crushed red pepper flakes\",\"1 cup water\",\"broth or dry red wine\",\"1 (28-ounce) can crushed tomatoes\",\"Salt and fresh ground black pepper\",\"Handful fresh basil leaves\",\"plus more for serving\",\"12 ounces dried spaghetti or favorite pasta shape\",\"1/2 cup shredded parmesan cheese\"],\"steps\":[\"Heat the oil in a large pot over medium-high heat (we use a Dutch oven)\",\"Add the meat and cook until browned about 8 minutes\",\"As the meat cooks use a wooden spoon to break it up into smaller crumbles\",\"Add the onions and cook stirring every once and a while until softened about 5 minutes\",\"Stir in the garlic tomato paste oregano and red pepper flakes and cook stirring continuously for about 1 minute\",\"Pour in the water and use a wooden spoon to scrape up any bits of meat or onion stuck to the bottom of the pot\",\"Stir in the tomatoes 3/4 teaspoon of salt and a generous pinch of black pepper\",\"Bring the sauce to a low simmer\",\"Cook uncovered at a low simmer for 25 minutes\",\"As it cooks stir and taste the sauce a few times so you can adjust the seasoning accordingly (see notes for suggestions)\",\"About 15 minutes before the sauce is finished cooking bring a large pot of salted water to the boil then cook pasta according to package directions but check for doneness a minute or two before the suggested cooking time\",\"Take the sauce off of the heat and then stir in the basil\",\"Toss in the cooked pasta and then leave for a minute so that the pasta absorbs some of the sauce\",\"Toss again and then serve with parmesan sprinkled on top\"],\"tags\":[\"pasta\",\"spaghetti\",\"easy\"]}"));
     }
-
-    searchAndSort = (query) => {
-        console.log("triggered");
-        if (query === "") {
-            console.log(localStorage.getItem("recipes"));
-            this.setState({recipes: JSON.parse(localStorage.getItem("recipes"))});
-            return;
-        }
-        let recipe = JSON.parse(localStorage.getItem("recipes"));
-        let queryMatch = new RegExp(query.toLowerCase());
-        console.log(recipe);
-        for (var i = 0; i < recipe.length; i++) {
-            if (recipe[i].name.toLowerCase() !== query.toLowerCase() || !recipe[i].name.toLowerCase().match(queryMatch)) {
-                var isMatch = false;
-                var ingredient = recipe[i].ingredients;
-                for (var g = 0; g < ingredient.length; g++) {
-                    if (ingredient[g].toLowerCase().match(queryMatch)) {
-                        isMatch = true;
-                        break;
-                    }
-                }
-                var tag = recipe[i].tags;
-                for (var v = 0; v < tag.length; v++) {
-                    if (isMatch) {
-                        break;
-                    }
-                    if (tag[v].toLowerCase().match(queryMatch)) {
-                        isMatch = true;
-                        break;
-                    }
-                }
-                if (!isMatch) {
-                    recipe.splice(i, 1);
-                    console.log("NOPE");
-                } else {
-                    console.log("YUP");
-                }
-            } else {
-                console.log("YUP");
-            }
-        }
-        this.setState({recipes: recipe});
-    };
 
     showAddModal() {
         this.setState({showAdd: !this.state.showAdd});
@@ -105,11 +63,15 @@ class MainPage extends React.Component {
 
     headerText() {
         // var recipe = JSON.parse(localStorage.getItem("recipes"));
-        if (this.state.recipes.length) {
-            return "All saved recipes"
-        } else {
-            return "No recipe found, add new ones to get started"
+        if (this.state.searchMode) {
+            return "Search Results";
         }
+        if (this.state.recipes.length) {
+            return "All saved recipes";
+        }
+
+        return "No recipe found, add new ones to get started"
+
     }
 
     getRemoteRecipe = () => {
@@ -144,18 +106,18 @@ class MainPage extends React.Component {
     parseRemoteRecipe = (json) => {
         const recipes = json.message;
         console.log(recipes);
-        for(let i = 0; i < recipes.length; i++){
+        for (let i = 0; i < recipes.length; i++) {
             let recipe = recipes[i];
             let ingredients = [];
-            recipe.ingredients.forEach((val,idx)=>{
+            recipe.ingredients.forEach((val, idx) => {
                 ingredients.push(val.amount + " " + val.name);
             });
             let steps = [];
-            recipe.steps.forEach((val,idx)=>{
+            recipe.steps.forEach((val, idx) => {
                 steps.push(val.number + ". " + val.step);
             });
             let tags = [];
-            recipe.tags.forEach((val,idx)=>{
+            recipe.tags.forEach((val, idx) => {
                 tags.push(val);
             });
             let rec = {
@@ -167,15 +129,29 @@ class MainPage extends React.Component {
             };
             console.log(rec);
             this.addRecipe(rec);
+            this.showAddModal();
         }
     };
+
+    searchAndSort = (query, result) => {
+        this.setState({recipes: []});
+        if (query === "") {
+            this.setState({searchMode: false});
+        } else {
+            this.setState({searchMode: true});
+        }
+        console.log(result);
+        this.parseRemoteRecipe(JSON.parse(result));
+    };
+
     render() {
         const recipes = this.state.recipes;
         var currentlyEditing = this.state.currentlyEditing;
 
         return (
             <div>
-                <Search browserState={this.props.browserState} onLogout={this.props.onLogout} onSearch={this.searchAndSort}/>
+                <Search browserState={this.props.browserState} onLogout={this.props.onLogout}
+                        onSearch={this.searchAndSort}/>
                 <br/>
                 <div className="jumbotron">
 

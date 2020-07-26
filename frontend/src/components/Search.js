@@ -16,6 +16,7 @@ class Search extends React.Component {
             "query": query,
             "limit": 50
         });
+        const search = this.props.onSearch;
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
         alert(jsonPayload); // DELETEME
@@ -23,10 +24,8 @@ class Search extends React.Component {
         try{
             xhr.addEventListener("load", function () {
                 if (this.status === 200 || this.status === 201) {
-                    setTimeout(() => {
-                        console.log(this.responseText)
-                        // this.props.onSearch(this.responseText)
-                    }, 1500);
+                    console.log(this.responseText);
+                    search(query, this.responseText);
                 }
                 else{
                     alert("Error " + this.status + ": " + this.responseText); // TODO: make error messaging better
