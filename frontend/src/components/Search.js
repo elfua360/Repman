@@ -35,7 +35,7 @@ class Search extends React.Component {
             alert(err.message);
         }
 
-        xhr.open("POST", "https://jd2.aleccoder.space/api/recipe/search")
+        xhr.open("POST", "https://jd2.aleccoder.space/api/recipes/search")
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhr.send(jsonPayload);
         event.preventDefault();
