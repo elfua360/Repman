@@ -1,3 +1,3 @@
-curl -X POST -H 'Content-type: application/json' --data '{"email":"me@me.me","password":"sunmethodus"}' https://jd2.aleccoder.space/api/login -v
-curl -X POST -H 'Content-type: application/json' --data '{"email":"me@me.me","password":"sunmethodus"}' http://jd2.aleccoder.space/api/register -v
-curl -X POST -H 'Content-type: application/json' --data '{"id":"me@me.me","password":"sunmethodus1"}' http://jd2.aleccoder.space/api/chagepassword -v
+curl -X POST -H 'Content-type: application/json' --data '{"email":"me@me.me","password":"sunmethodus"}' http://jd2.aleccoder.space/api/register -v -s
+curl -X POST -H 'Content-type: application/json' --data '{"email":"me@me.me","password":"sunmethodus"}' https://jd2.aleccoder.space/api/login -v -s
+curl -X POST -H 'Content-type: application/json' --data '{"id":"me@me.me","password":"sunmethodus1"}' http://jd2.aleccoder.space/api/chagepassword -v -s
