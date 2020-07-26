@@ -36,14 +36,16 @@ class MainPage extends React.Component {
     showEditModal(index) {
         this.setState({currentlyEditing: index, showEdit: !this.state.showEdit});
     }
+
     refreshList = () => {
-        this.setState({recipes:[]});
+        this.setState({recipes: []});
         this.getRemoteRecipe();
     };
     addRecipeAfter = () => {
         this.showAddModal();
         this.refreshList();
     }
+
     addRecipe(recipe) {
         let recipes = this.state.recipes;
         recipes.push(recipe);
@@ -119,7 +121,7 @@ class MainPage extends React.Component {
             });
             let steps = [];
             recipe.steps.forEach((val, idx) => {
-                steps.push({number:val.number, step:val.step});
+                steps.push({number: val.number, step: val.step});
             });
             let tags = [];
             recipe.tags.forEach((val, idx) => {
@@ -173,21 +175,25 @@ class MainPage extends React.Component {
                                             {console.log(recipe)}
                                             {
                                                 recipe.ingredients.map((ingredient, index) => (
-                                                <ListGroup.Item key={index}>{(ingredient.amount + 1) + " " + ingredient.name}</ListGroup.Item>
-                                            ))}
+                                                    <ListGroup.Item
+                                                        key={index}>{(ingredient.amount) + " of " + ingredient.name}</ListGroup.Item>
+                                                ))}
                                         </ListGroup.Item>
                                         <Card.Title>Steps</Card.Title>
                                         <ListGroup.Item>
                                             {recipe.steps.map((steps, index) => (
-                                                <ListGroup.Item key={index}>{(steps.number + 1) + " " + steps.step}</ListGroup.Item>
+                                                <ListGroup.Item
+                                                    key={index}>{(steps.number + 1) + ". " + steps.step}</ListGroup.Item>
                                             ))}
                                         </ListGroup.Item>
-                                        <Card.Title>Tags</Card.Title>
-                                        <ListGroup.Item>
-                                            {recipe.tags.map((tags, index) => (
-                                                <ListGroup.Item key={index}>{tags}</ListGroup.Item>
-                                            ))}
-                                        </ListGroup.Item>
+                                        <br/>
+                                        <Card.Subtitle>Tags</Card.Subtitle>
+                                        <Card.Text>
+                                                {recipe.tags.map((tags, index) => (
+                                                    // <ListGroup.Item key={index}>{tags}</ListGroup.Item>
+                                                    tags + " "
+                                                ))}
+                                        </Card.Text>
                                     </ListGroup>
                                     <ButtonToolbar>
                                         <Button variant="warning" onClick={() => {
@@ -207,7 +213,8 @@ class MainPage extends React.Component {
                     </ListGroup>
                     <br/>
                     <Button variant="primary" onClick={this.showAddModal}>Add Recipe</Button>
-                    <RecipeAdd browserState={this.props.browserState} onShow={this.state.showAdd} onAdd={this.addRecipeAfter} onAddModal={this.showAddModal}/>
+                    <RecipeAdd browserState={this.props.browserState} onShow={this.state.showAdd}
+                               onAdd={this.addRecipeAfter} onAddModal={this.showAddModal}/>
                 </div>
             </div>
 

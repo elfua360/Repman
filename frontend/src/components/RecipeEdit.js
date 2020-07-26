@@ -49,6 +49,8 @@ class RecipeEdit extends React.Component {
     var ingredients = this.state.ingredients.split(regExp);
     var steps = this.state.steps.split(regExp);
     var tags = this.state.tags.split(regExp);
+
+
     onEdit(name, ingredients, steps, tags, currentlyEditing);
   }
   handleCancel() {
