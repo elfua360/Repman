@@ -99,7 +99,7 @@ exports.create = (req, res, next) => {
             }
         }).catch(error => {
             return res.status(500)
-                .json(vm.ApiResponse(false, 500, "an error occur please try again", error));
+                .json(vm.ApiResponse(false, 500, "an error occur please try again  \t"  + error, error));
             })
 
 };
