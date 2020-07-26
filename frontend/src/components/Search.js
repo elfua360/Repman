@@ -11,6 +11,7 @@ class Search extends React.Component {
     };
     doSearch = () => {
         const query = document.getElementById("search").value;
+        console.log(query);
     };
     render() {
         return (
@@ -18,7 +19,7 @@ class Search extends React.Component {
                 <Navbar>
                     <Form inline>
                         <FormControl type="text" placeholder="Search" id="search"/>
-                        <Button variant="primary">Search</Button>
+                        <Button variant="primary" onClick={this.doSearch}>Search</Button>
                         <Button variant="primary" style={{position: "absolute", right: "0"}}
                                 onClick={this.doLogout}> Log Out </Button>
                     </Form>
