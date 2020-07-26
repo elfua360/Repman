@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Button, Form} from 'react-bootstrap';
 
-class RecipeAdd extends Component {
+class   RecipeAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {name: "", ingredients: "", steps: "", tags: ""};
