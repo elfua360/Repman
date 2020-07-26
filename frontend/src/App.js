@@ -61,8 +61,7 @@ class App extends React.Component {
             return (
                 <>
                     <PageTitle/>
-                    <Search onLogout={this.doLogout}/>
-                    <MainPage/>
+                    <MainPage onLogout={this.doLogout}/>
                 </>
             )
         } else {

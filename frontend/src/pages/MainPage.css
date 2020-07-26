@@ -1,10 +1,11 @@
-body {
-    background-color: #61dafb;
-    background-image: none;
-}
-
 #landing {
     background-color: #ffffff;
     text-align: center;
     margin: 25px 35%;
+}
+#search-container{
+    background-color: white;
+}
+.jumbotron{
+    padding: 1em;
 }

@@ -39,6 +39,7 @@ class RecipeAdd extends Component {
         var newTags = this.state.tags.split(regExp);
         var newRecipe = {name: newName, ingredients: newIngredients, steps: newSteps, tags: newTags};
         onAdd(newRecipe);
+        console.log(JSON.stringify(newRecipe));
         this.setState({name: "", ingredients: "", steps: "", tags: ""});
     }
 
