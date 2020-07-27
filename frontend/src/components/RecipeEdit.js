@@ -12,11 +12,12 @@ class RecipeEdit extends React.Component {
     this.handleEdit = this.handleEdit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
-  static derivedState(props, state) {
+/*  static derivedState(props, state) {
     const prevName = state.prevName;
     const prevIngredients = state.prevIngredients;
     const prevSteps = state.prevSteps;
     const prevTags = state.prevTags;
+
     const name = prevName !== props.recipe.name ? props.recipe.name : state.name;
     const ingredients = prevIngredients !== props.recipe.ingredients.join(",") ? props.recipe.ingredients.join(",") : state.ingredients;
     const steps = prevSteps !== props.recipe.steps.join(",") ? props.recipe.steps.join(",") : state.steps;
@@ -27,7 +28,7 @@ class RecipeEdit extends React.Component {
       prevSteps: props.recipe.steps.join(","), steps,
       prevTags: props.recipe.tags.join(","), tags,
     }
-  }
+  }*/
   handleNameChange(e) {
     this.setState({name: e.target.value});
   }
@@ -68,6 +69,7 @@ class RecipeEdit extends React.Component {
         && regex2.test(this.state.ingredients) && regex3.test(this.state.ingredients)
         && regex2.test(this.state.steps) && regex3.test(this.state.steps)
         && regex2.test(this.state.tags) && regex3.test(this.state.tags);
+    console.log(this.state);
     return(
       <Modal show={onShow} onHide={this.handleCancel}>
         <Modal.Header closeButton>

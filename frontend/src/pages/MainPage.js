@@ -62,10 +62,36 @@ class MainPage extends React.Component {
     }
 
     deleteRecipe(index) {
-        let recipes = this.state.recipes.slice();
-        recipes.splice(index, 1);
-        localStorage.setItem('recipes', JSON.stringify(recipes));
-        this.setState({recipes: recipes, currentlyEditing: 0});
+        const deleteRecipeLocal = () => {
+            let recipes = this.state.recipes.slice();
+            recipes.splice(index, 1);
+            localStorage.setItem('recipes', JSON.stringify(recipes));
+            this.setState({recipes: recipes, currentlyEditing: 0});
+        };
+        const xhr = new XMLHttpRequest();
+        const jsonPayload = {
+            id: this.state.recipes[index].id
+        };
+        console.log(jsonPayload);
+        try {
+            xhr.addEventListener("load", function () {
+                if (this.status === 201) {
+                    deleteRecipeLocal();
+                } else {
+                    console.log("AAAAAAA1AAAA");
+                    console.log(this.status);
+                }
+            });
+        } catch (err) {
+            console.log("1AAAAAAAAAAA");
+        }
+
+        xhr.open("DELETE", "https://jd2.aleccoder.space/api/recipes/delete");
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.send(JSON.stringify(jsonPayload));
+
+
+
     }
 
     headerText() {
