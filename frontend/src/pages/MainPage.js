@@ -4,8 +4,6 @@ import RecipeAdd from '../components/RecipeAdd';
 import RecipeEdit from '../components/RecipeEdit';
 import './MainPage.css';
 import PageTitle from "../components/PageTitle";
-import Form from "react-bootstrap/Form";
-import {AlertLink} from "react-bootstrap/Alert";
 
 class MainPage extends React.Component {
     componentDidMount() {
@@ -103,6 +101,10 @@ class MainPage extends React.Component {
 
     headerText() {
         // var recipe = JSON.parse(localStorage.getItem("recipes"));
+        if(!this.props.isEmailVerfied){
+            // this.setState({recipes:[]});
+            return "Please Verify Your Email to Continue";
+        }
         if (this.state.searchMode) {
             return "Search Results";
         }
@@ -116,7 +118,6 @@ class MainPage extends React.Component {
 
     getRemoteRecipe = () => {
         var info = this.props.browserState;
-        var emailVerified = this.props.isEmailVerfied;
         console.log(info);
         const jsonPayload = JSON.stringify({
             "owner_id": info.ownerId,
@@ -174,32 +175,25 @@ class MainPage extends React.Component {
     };
     resendVerification = () => {
         var info = this.props.browserState;
-        var emailVerified = this.props.isEmailVerfied;
-        console.log(info);
-        const jsonPayload = JSON.stringify({
-            "owner_id": info.ownerId,
-            "query": "",
-            "limit": 50
-        });
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
-        const parseRemoteRecipe = this.parseRemoteRecipe;
         try {
             xhr.addEventListener("load", function () {
                 if (this.status === 200 || this.status === 201) {
-                    const payload = JSON.parse(this.responseText);
-                    console.log(payload);
-                    parseRemoteRecipe(payload);
-                } else {
+                    document.getElementById("emailWarning").className = "alert alert-success";
+                    document.getElementById("emailWarning").innerHTML = "Verification Link has been reset. You will be logged out momentarily";
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 2000);
 
                 }
             })
-        } catch (err) {
-
+        } catch (e) {
+            console.log(e);
         }
-        xhr.open("POST", "https://jd2.aleccoder.space/api/recipes/search")
+        xhr.open("GET", "https://jd2.aleccoder.space/api/resend/" + info.ownerId);
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-        xhr.send(jsonPayload);
+        xhr.send();
     }
     searchAndSort = (query, result) => {
         this.setState({recipes: []});
@@ -281,17 +275,18 @@ class MainPage extends React.Component {
                     <RecipeAdd browserState={this.props.browserState} onShow={this.state.showAdd}
                                onAdd={this.addRecipeAfter} onAddModal={this.showAddModal}/>
                     <br/>
-                    {/*{*/}
-                    
-                    {/*    function (react) {*/}
-                    {/*        if (!emailVerified) {*/}
-                    {/*            return <Alert variant="danger">*/}
-                    {/*                To continue to use the app, please verify your account.*/}
-                    {/*                <AlertLink onClick={}> Click here to resend verification email. </AlertLink>*/}
-                    {/*            </Alert>*/}
-                    {/*        }*/}
-                    {/*    }(this)*/}
-                    {/*}*/}
+                    {
+
+                        function (react) {
+                            if (!react.props.emailVerified) {
+                                return <Alert variant="danger" id="emailWarning">
+                                    To continue to use the app, please verify your account.
+                                    <Alert.Link onClick={react.resendVerification}> Click here to resend verification
+                                        email. </Alert.Link>
+                                </Alert>
+                            }
+                        }(this)
+                    }
                 </div>
             </div>
 
