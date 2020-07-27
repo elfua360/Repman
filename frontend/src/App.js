@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import LandingPage from './pages/LandingPage';
 import MainPage from './pages/MainPage'
-import PageTitle from './components/PageTitle'
 
 class App extends React.Component {
     constructor(props) {
