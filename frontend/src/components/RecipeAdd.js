@@ -33,7 +33,7 @@ class   RecipeAdd extends Component {
         e.preventDefault();
         const onAdd = this.props.onAdd;
         const regExp = /\s*,\s*/;
-        const regExpIngredients = /\s*:\s*/;
+        const regExpIngredients = /\s*of\s*/;
         const ownerId = this.props.browserState.ownerId;
         var newName = this.state.name;
         var newIngredients = this.state.ingredients.split(regExp);
@@ -52,7 +52,7 @@ class   RecipeAdd extends Component {
             let ingredient = {};
             let newIngrd = newIngredients[i].split(regExpIngredients);
             ingredient["name"] = (newIngrd.length === 1) ? newIngrd[0]:newIngrd[1];
-            ingredient["amount"] = (newIngrd.length === 1) ? 1:newIngrd[0];
+            ingredient["amount"] = (newIngrd.length === 1) ? 0:newIngrd[0];
             ingredients.push(ingredient);
         }
 
@@ -119,7 +119,7 @@ class   RecipeAdd extends Component {
                         <Form.Label>Recipe Ingredients</Form.Label>
                         <Form.Control as="textarea" type="text" rows="3" required
                                       onChange={this.handleIngredientsChange} value={this.state.ingredients}
-                                      placeholder="e.g: 1 cup : flour, 2 tsp : sugar ... etc"/>
+                                      placeholder="e.g: 1 cup of flour, 2 tsp of sugar ... etc"/>
                     </Form.Group>
                     <Form.Group controlId="recipeSteps">
                         <Form.Label>Recipe Steps</Form.Label>

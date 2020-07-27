@@ -176,7 +176,7 @@ class MainPage extends React.Component {
                                             {
                                                 recipe.ingredients.map((ingredient, index) => (
                                                     <ListGroup.Item
-                                                        key={index}>{(ingredient.amount) + " of " + ingredient.name}</ListGroup.Item>
+                                                        key={index}>{(ingredient.amount === "0" ? "":(ingredient.amount + " of ")) + ingredient.name}</ListGroup.Item>
                                                 ))}
                                         </ListGroup.Item>
                                         <Card.Title>Steps</Card.Title>
