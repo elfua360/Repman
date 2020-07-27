@@ -7,7 +7,8 @@ import PageTitle from "../components/PageTitle";
 
 class MainPage extends React.Component {
     componentDidMount() {
-        this.getRemoteRecipe();
+        if(this.props.isEmailVerfied)
+            this.getRemoteRecipe();
     }
 
     constructor(props) {
@@ -101,7 +102,7 @@ class MainPage extends React.Component {
 
     headerText() {
         // var recipe = JSON.parse(localStorage.getItem("recipes"));
-        if(!this.props.isEmailVerfied){
+        if (!this.props.isEmailVerfied) {
             // this.setState({recipes:[]});
             return "Please Verify Your Email to Continue";
         }
@@ -205,6 +206,15 @@ class MainPage extends React.Component {
         console.log(result);
         this.parseRemoteRecipe(JSON.parse(result));
     };
+    isEmailActivated = () => {
+        if(!this.props.isEmailVerfied){
+            return <Alert variant="danger" id="emailWarning">
+                To continue to use the app, please verify your account.
+                <Alert.Link onClick={this.resendVerification}> Click here to resend verification
+                    email. </Alert.Link>
+            </Alert>;
+        }
+    }
 
     render() {
         const recipes = this.state.recipes;
@@ -274,18 +284,9 @@ class MainPage extends React.Component {
 
                     <RecipeAdd browserState={this.props.browserState} onShow={this.state.showAdd}
                                onAdd={this.addRecipeAfter} onAddModal={this.showAddModal}/>
-                    <br/>
+                    <br/><br/>
                     {
-
-                        function (react) {
-                            if (!react.props.emailVerified) {
-                                return <Alert variant="danger" id="emailWarning">
-                                    To continue to use the app, please verify your account.
-                                    <Alert.Link onClick={react.resendVerification}> Click here to resend verification
-                                        email. </Alert.Link>
-                                </Alert>
-                            }
-                        }(this)
+                        this.isEmailActivated()
                     }
                 </div>
             </div>
