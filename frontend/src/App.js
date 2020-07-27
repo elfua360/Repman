@@ -11,12 +11,13 @@ class App extends React.Component {
             ownerId: null,
             firstName: null,
             lastName: null,
-            authToken: null
+            authToken: null,
+            emailVerified: false
         }
     };
 
-    authTokenHandler() {
-        return this.state.authToken;
+    isEmailVerified() {
+        return this.state.emailVerified;
     };
 
     getUserData = () => {
@@ -40,7 +41,8 @@ class App extends React.Component {
             ownerId: userData["_id"],
             firstName: userData["first_name"],
             lastName: userData["last_name"],
-            authToken: jsonData["token"]
+            authToken: jsonData["token"],
+            emailVerified: userData["active"]
         });
     };
     doLoginRegister = (data) => {
@@ -51,15 +53,15 @@ class App extends React.Component {
             ownerId: userData["_id"],
             firstName: userData["first_name"],
             last_name: userData["last_name"],
-            authToken: null
+            authToken: null,
+            emailVerified: false
         });
     };
     router = () => {
         if (this.state.isLoggedIn) {
             return (
                 <>
-
-                    <MainPage browserState={this.getUserData()} onLogout={this.doLogout}/>
+                    <MainPage isEmailVerfied={this.isEmailVerified()} browserState={this.getUserData()} onLogout={this.doLogout}/>
                 </>
             )
         } else {
