@@ -118,7 +118,7 @@ exports.changePassword = (req, res, next) => {
                         .json(vm.ApiResponse(false, 500, "server error"))
                 }
 
-                return res.status(500)
+                return res.status(200)
                     .json(vm.ApiResponse(true, 200, "password updated"))
             })
         })
