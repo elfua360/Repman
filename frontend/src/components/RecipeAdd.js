@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Button, Form} from 'react-bootstrap';
 
-class   RecipeAdd extends Component {
+class RecipeAdd extends Component {
     constructor(props) {
         super(props);
         this.state = {name: "", ingredients: "", steps: "", tags: ""};
@@ -42,17 +42,17 @@ class   RecipeAdd extends Component {
         var steps = [];
         var ingredients = [];
         console.log(newSteps, newIngredients);
-        for(let i = 0; i < newSteps.length; i++){
+        for (let i = 0; i < newSteps.length; i++) {
             let step = {};
             step["step"] = newSteps[i];
             step["number"] = i;
             steps.push(step);
         }
-        for(let i = 0; i < newIngredients.length; i++){
+        for (let i = 0; i < newIngredients.length; i++) {
             let ingredient = {};
             let newIngrd = newIngredients[i].split(regExpIngredients);
-            ingredient["name"] = (newIngrd.length === 1) ? newIngrd[0]:newIngrd[1];
-            ingredient["amount"] = (newIngrd.length === 1) ? 0:newIngrd[0];
+            ingredient["name"] = (newIngrd.length === 1) ? newIngrd[0] : newIngrd[1];
+            ingredient["amount"] = (newIngrd.length === 1) ? 0 : newIngrd[0];
             ingredients.push(ingredient);
         }
 
@@ -68,18 +68,17 @@ class   RecipeAdd extends Component {
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
 
-        try{
+        try {
             xhr.addEventListener("load", function () {
                 if (this.status === 200 || this.status === 201) {
                     setTimeout(() => {
                         onAdd(); // Does this need to be the jsonPayload or the xhr.responseText?
                     }, 1500);
-                }
-                else{
+                } else {
                     alert("Error " + this.status + ": " + this.responseText); // TODO: make error messaging better
                 }
             });
-        } catch (err){
+        } catch (err) {
             alert(err.message);
         }
 

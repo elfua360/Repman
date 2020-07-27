@@ -3,7 +3,7 @@ import {Card, Button, ButtonToolbar, ListGroup} from 'react-bootstrap';
 import RecipeAdd from '../components/RecipeAdd';
 import RecipeEdit from '../components/RecipeEdit';
 import './MainPage.css';
-import Search from "../components/Search";
+import PageTitle from "../components/PageTitle";
 
 class MainPage extends React.Component {
     componentDidMount() {
@@ -89,7 +89,6 @@ class MainPage extends React.Component {
         xhr.open("DELETE", "https://jd2.aleccoder.space/api/recipes/delete");
         xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
         xhr.send(JSON.stringify(jsonPayload));
-
 
 
     }
@@ -182,8 +181,7 @@ class MainPage extends React.Component {
 
         return (
             <div>
-                <Search browserState={this.props.browserState} onLogout={this.props.onLogout}
-                        onSearch={this.searchAndSort}/>
+                <PageTitle onSearch={this.searchAndSort} onLogout={this.props.onLogout} browserState={this.props.browserState}/>
                 <br/>
                 <div className="jumbotron">
 
@@ -202,7 +200,7 @@ class MainPage extends React.Component {
                                             {
                                                 recipe.ingredients.map((ingredient, index) => (
                                                     <ListGroup.Item
-                                                        key={index}>{(ingredient.amount === "0" ? "":(ingredient.amount + " of ")) + ingredient.name}</ListGroup.Item>
+                                                        key={index}>{(ingredient.amount === "0" ? "" : (ingredient.amount + " of ")) + ingredient.name}</ListGroup.Item>
                                                 ))}
                                         </ListGroup.Item>
                                         <Card.Title>Steps</Card.Title>
@@ -215,10 +213,10 @@ class MainPage extends React.Component {
                                         <br/>
                                         <Card.Subtitle>Tags</Card.Subtitle>
                                         <Card.Text>
-                                                {recipe.tags.map((tags, index) => (
-                                                    // <ListGroup.Item key={index}>{tags}</ListGroup.Item>
-                                                    tags + " "
-                                                ))}
+                                            {recipe.tags.map((tags, index) => (
+                                                // <ListGroup.Item key={index}>{tags}</ListGroup.Item>
+                                                tags + " "
+                                            ))}
                                         </Card.Text>
                                     </ListGroup>
                                     <ButtonToolbar>
