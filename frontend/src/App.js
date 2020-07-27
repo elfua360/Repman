@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import LandingPage from './pages/LandingPage';
 import MainPage from './pages/MainPage'
-import PageTitle from './components/PageTitle'
 
 class App extends React.Component {
     constructor(props) {
@@ -40,7 +39,7 @@ class App extends React.Component {
             isLoggedIn: true,
             ownerId: userData["_id"],
             firstName: userData["first_name"],
-            last_name: userData["last_name"],
+            lastName: userData["last_name"],
             authToken: jsonData["token"]
         });
     };
@@ -59,7 +58,7 @@ class App extends React.Component {
         if (this.state.isLoggedIn) {
             return (
                 <>
-                    <PageTitle/>
+
                     <MainPage browserState={this.getUserData()} onLogout={this.doLogout}/>
                 </>
             )
