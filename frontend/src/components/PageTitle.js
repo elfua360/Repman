@@ -3,6 +3,7 @@ import "./PageTitle.css"
 import {Navbar, Nav, NavDropdown, FormControl, Form, Button} from "react-bootstrap";
 import ChangePassword from "./ChangePassword";
 
+
 class PageTitle extends React.Component {
     doLogout = () => {
         const logout = this.props.onLogout;
@@ -48,7 +49,6 @@ class PageTitle extends React.Component {
         const search = this.props.onSearch;
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
-        // alert(jsonPayload); // DELETEME
 
         try {
             xhr.addEventListener("load", function () {

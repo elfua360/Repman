@@ -4,10 +4,11 @@ import RecipeAdd from '../components/RecipeAdd';
 import RecipeEdit from '../components/RecipeEdit';
 import './MainPage.css';
 import PageTitle from "../components/PageTitle";
+import RecipeQRCode from "../components/RecipeQRCode";
 
 class MainPage extends React.Component {
     componentDidMount() {
-        if(this.props.isEmailVerfied)
+        if (this.props.isEmailVerfied)
             this.getRemoteRecipe();
     }
 
@@ -44,6 +45,9 @@ class MainPage extends React.Component {
         this.setState({currentlyEditing: index, showEdit: !this.state.showEdit});
     }
 
+    showQRCodeModal = (index) => {
+        this.setState({currentlyEditing: index, showQR: !this.state.showQR})
+    }
     refreshList = () => {
         this.setState({recipes: []});
         this.getRemoteRecipe();
@@ -207,7 +211,7 @@ class MainPage extends React.Component {
         this.parseRemoteRecipe(JSON.parse(result));
     };
     isEmailActivated = () => {
-        if(!this.props.isEmailVerfied){
+        if (!this.props.isEmailVerfied) {
             return <Alert variant="danger" id="emailWarning">
                 To continue to use the app, please verify your account.
                 <Alert.Link onClick={this.resendVerification}> Click here to resend verification
@@ -222,6 +226,7 @@ class MainPage extends React.Component {
 
         return (
             <div>
+                <RecipeQRCode/>
                 <PageTitle onSearch={this.searchAndSort} onLogout={this.props.onLogout}
                            browserState={this.props.browserState} toggleForgot={this.toggleForgotPasswordModal}
                            showForgotStatus={this.state.showForgot}/>
@@ -263,17 +268,23 @@ class MainPage extends React.Component {
                                         </Card.Text>
                                     </ListGroup>
                                     <ButtonToolbar>
-                                        <Button variant="warning" onClick={() => {
+                                        <Button variant="outline-success" onClick={() => {
+                                            this.showQRCodeModal(index)
+                                        }} className="mr-sm-2">Show QR Code</Button>
+                                        <Button variant="outline-primary" onClick={() => {
                                             this.showEditModal(index)
-                                        }}>Edit</Button>
-                                        <Button variant="danger" onClick={() => {
+                                        }} className="mr-sm-2">Edit</Button>
+                                        <Button variant="outline-danger" onClick={() => {
                                             this.deleteRecipe(index)
-                                        }}>Delete</Button>
+                                        }} className="mr-sm-2">Delete</Button>
                                     </ButtonToolbar>
                                 </Card.Body>
                                 <RecipeEdit onShow={this.state.showEdit} onEdit={this.editRecipe} onEditModal={() => {
                                     this.showEditModal(currentlyEditing)
                                 }} currentlyEditing={currentlyEditing} recipe={recipes[currentlyEditing]}/>
+                                <RecipeQRCode show={this.state.showQR} toggleModal={() => {
+                                    this.showQRCodeModal(currentlyEditing)
+                                }} recipe={recipes[currentlyEditing].id}/>
                             </Card>
                         ))}
                         <br/>
