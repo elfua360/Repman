@@ -2,10 +2,6 @@ import React from 'react';
 import {Modal, Image} from 'react-bootstrap';
 
 class RecipeQRCode extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
 
         return (
