@@ -5,7 +5,6 @@ class RecipeEdit extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props.recipe);
-    
     this.state = {name: this.props.recipe.name, ingredients: this.props.recipe.ingredients, steps: this.props.recipe.steps, tags: this.props.recipe.tags};
     console.log(this.state);
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -120,7 +119,7 @@ class RecipeEdit extends React.Component {
         && regex2.test(this.state.steps) && regex3.test(this.state.steps)
         && regex2.test(this.state.tags) && regex3.test(this.state.tags);
     console.log(this.state);
-    console.log(this.props.recipe);
+    console.log(this.props.recipe);/*
     var ingredients = this.props.recipe.ingredients;
     var steps = this.props.recipe.steps;
     var newIngredients = [];
@@ -132,7 +131,7 @@ class RecipeEdit extends React.Component {
     for (let i = 0; i < steps.length; i++)
     {
       newSteps[i] = steps[i].step;
-    }
+    }*/
 
     return(
       <Modal show={onShow} onHide={this.handleCancel}>
@@ -142,15 +141,15 @@ class RecipeEdit extends React.Component {
         <Modal.Body>
           <Form.Group controlId="recipeName">
             <Form.Label>Recipe Name</Form.Label>
-            <Form.Control type="text" required oChange={this.handleNameChange} value={this.state.name} placeholder="Enter Recipe Name" />
+            <Form.Control type="text" required onChange={this.handleNameChange} value={this.state.name} placeholder="Enter Recipe Name" />
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={newIngredients} placeholder="separate by commas" />
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={newSteps} placeholder="separate by commas"/>
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas"/>
           </Form.Group>
           <Form.Group controlId="tags">
             <Form.Label>Tags</Form.Label>
