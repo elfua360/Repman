@@ -244,7 +244,7 @@ class MainPage extends React.Component {
                                     <ListGroup>
                                         <Card.Title>Ingredients</Card.Title>
                                         <ListGroup.Item>
-                                            {console.log("Rendering " + recipe)}
+                                            {console.log(recipe)}
                                             {
                                                 recipe.ingredients.map((ingredient, index) => (
                                                     <ListGroup.Item
