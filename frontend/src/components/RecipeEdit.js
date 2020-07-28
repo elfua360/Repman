@@ -10,12 +10,12 @@ class RecipeEdit extends React.Component {
     for (let i = 0; i < ingredients.length; i++)
     {
       ingredients[i] = (ingredients[i].amount === "0" ? "" : (ingredients[i].amount + " of ")) + ingredients[i].name;
-    }
+    }/*
     for (let i = 0; i < steps.length; i++)
     {
       steps[i] = steps.step;
-    }
-    this.state = {name: this.props.recipe.name, ingredients: this.props.recipe.ingredients, steps: this.props.recipe.steps, tags: this.props.recipe.tags};
+    }*/
+    this.state = {name: this.props.recipe.name, ingredients: ingredients, steps: steps, tags: this.props.recipe.tags};
     console.log(this.state);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleIngredientsChange = this.handleIngredientsChange.bind(this);
