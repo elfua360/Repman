@@ -120,7 +120,7 @@ exports.verify = (req, res, next) => {
                         /*    return res.status(200)
                                 .json(vm.ApiResponse(true, 200, "account activated")); */
                             res.set('Content-Type', 'text/html');
-                            res.send(new Buffer('<h2>Account Activated</h2>'));
+                            res.send(new Buffer('<a href="https://jd2.aleccoder.space">Account activated! Click to return home</a>')); // <a href="https://jd2.aleccoder.space">Return home</a>
                         }
                     });
                 }
