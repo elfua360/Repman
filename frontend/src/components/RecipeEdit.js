@@ -5,17 +5,8 @@ class RecipeEdit extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props.recipe);
-    var ingredients = this.props.recipe.ingredients;
-    var steps = this.props.recipe.steps;
-    for (let i = 0; i < ingredients.length; i++)
-    {
-      ingredients[i] = (ingredients[i].amount === "0" ? "" : (ingredients[i].amount + " of ")) + ingredients[i].name;
-    }
-    for (let i = 0; i < steps.length; i++)
-    {
-      steps[i] = steps[i].step;
-    }
-    this.state = {name: this.props.recipe.name, ingredients: ingredients, steps: steps, tags: this.props.recipe.tags};
+    
+    this.state = {name: this.props.recipe.name, ingredients: this.props.recipe.ingredients, steps: this.props.recipe.steps, tags: this.props.recipe.tags};
     console.log(this.state);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleIngredientsChange = this.handleIngredientsChange.bind(this);
@@ -51,7 +42,9 @@ class RecipeEdit extends React.Component {
     this.setState({steps: e.target.value});
   }
   handleTagsChange(e) {
-    this.setState({tags: e.target.value});
+    const regExp = /\s*,\s*/;
+    var newTags = e.target.value.split(regExp)
+    this.setState({tags: newTags});
   }
   handleEdit(e) {
     e.preventDefault();
@@ -128,7 +121,18 @@ class RecipeEdit extends React.Component {
         && regex2.test(this.state.tags) && regex3.test(this.state.tags);
     console.log(this.state);
     console.log(this.props.recipe);
-    //this.setState({name: this.props.recipe.name, ingredients: this.props.recipe.ingredients, steps: this.props.recipe.steps, tags: this.props.recipe.tags});
+    var ingredients = this.props.recipe.ingredients;
+    var steps = this.props.recipe.steps;
+    var newIngredients = [];
+    var newSteps = [];
+    for (let i = 0; i < ingredients.length; i++)
+    {
+      newIngredients[i] = (ingredients[i].amount === "0" ? "" : (ingredients[i].amount + " of ")) + ingredients[i].name;
+    }
+    for (let i = 0; i < steps.length; i++)
+    {
+      newSteps[i] = steps[i].step;
+    }
 
     return(
       <Modal show={onShow} onHide={this.handleCancel}>
@@ -142,11 +146,11 @@ class RecipeEdit extends React.Component {
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={newIngredients} placeholder="separate by commas" />
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas"/>
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={newSteps} placeholder="separate by commas"/>
           </Form.Group>
           <Form.Group controlId="tags">
             <Form.Label>Tags</Form.Label>
