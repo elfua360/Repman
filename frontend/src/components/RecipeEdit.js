@@ -59,7 +59,7 @@ class RecipeEdit extends React.Component {
     const currentlyEditing = this.props.currentlyEditing;
     const regExp = /\s*,\s*/;
     const regExpIngredients = /\s*of\s*/;
-    const id = this.props.recipe[currentlyEditing].id;
+    const id = this.props.recipe.id;
     var name = this.state.name;
     var newIngredients = this.state.ingredients.split(regExp);
     var newSteps = this.state.steps.split(regExp);
