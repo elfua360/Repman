@@ -171,7 +171,9 @@ class RecipeEdit extends React.Component {
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas"/>
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.steps.map((step, index) => (
+                                                    step.step
+                                                ))} placeholder="separate by commas"/>
           </Form.Group>
           <Form.Group controlId="tags">
             <Form.Label>Tags</Form.Label>
