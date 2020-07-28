@@ -109,7 +109,9 @@ class RecipeEdit extends React.Component {
     const onShow = this.props.onShow;
     var regex1 = /^\S/;
     var regex2 = /^[^,\s]/;
-	var regex3 = /[^,\s]$/;
+    var regex3 = /[^,\s]$/;
+    this.setState({name: this.props.recipe.name, ingredients: this.props.recipe.ingredients.join(","),
+    steps: this.props.recipe.steps.join(","), tags: this.props.recipe.tags.join(",")});
     const validRecipe = regex1.test(this.state.name)
         && regex2.test(this.state.ingredients) && regex3.test(this.state.ingredients)
         && regex2.test(this.state.steps) && regex3.test(this.state.steps)
