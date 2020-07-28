@@ -46,13 +46,13 @@ class App extends React.Component {
         });
     };
     doLoginRegister = (data) => {
-        const userData = JSON.parse(data)["data"];
+        const userData = JSON.parse(data)["data"]["user"];
         console.log(userData);
         this.setState({
             isLoggedIn: true,
             ownerId: userData["_id"],
             firstName: userData["first_name"],
-            last_name: userData["last_name"],
+            lastName: userData["last_name"],
             authToken: null,
             emailVerified: false
         });

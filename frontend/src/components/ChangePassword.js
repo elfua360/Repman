@@ -60,11 +60,11 @@ class ChangePassword extends React.Component{
                 <Modal.Body>
                     <Form onSubmit={this.doReset}>
                         <Form.Group controlId="passwordReset">
-                            <Form.Label>Password</Form.Label>
+                            <Form.Label>New Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={this.handleEdit}/>
                         </Form.Group>
                         <Form.Group controlId="passwordResetConfirm">
-                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Label>Confirm New Password</Form.Label>
                             <Form.Control type="password" placeholder="Password" onChange={this.handleEdit}/>
                         </Form.Group>
                         <br/>
