@@ -279,8 +279,8 @@ class MainPage extends React.Component {
                                         }} className="mr-sm-2">Delete</Button>
                                     </ButtonToolbar>
                                 </Card.Body>
-                                <RecipeEdit onShow={this.state.showEdit} recipeid = {this.state.recipes[index].id}  onEdit={this.editRecipe} onEditModal={() => {
-                                    this.showEditModal(currentlyEditing)
+                                <RecipeEdit onShow={this.state.showEdit} onEdit={this.editRecipe} onEditModal={() => {
+                                    this.showEditModal(index)
                                 }} currentlyEditing={currentlyEditing} recipe={recipes[currentlyEditing]}/>
                                 <RecipeQRCode show={this.state.showQR} toggleModal={() => {
                                     this.showQRCodeModal(currentlyEditing)
