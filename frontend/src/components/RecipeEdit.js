@@ -55,7 +55,7 @@ class RecipeEdit extends React.Component {
     var name = this.state.name;
     var newIngredients = this.state.ingredients.split(regExp);
     var newSteps = this.state.steps.split(regExp);
-    var tags = this.state.tags.split(regExp);
+    var tags = this.state.tags;
     var steps = [];
     var ingredients = [];
     console.log("id:" + id);
