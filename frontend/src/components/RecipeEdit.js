@@ -5,8 +5,8 @@ class RecipeEdit extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props.recipe);
-    var ingredients = this.props.recipe.ingredients.slice(0);
-    var steps = this.props.recipe.steps.slice(0);
+    var ingredients = this.props.recipe.ingredients;
+    var steps = this.props.recipe.steps;
     for (let i = 0; i < ingredients.length; i++)
     {
       ingredients[i] = (ingredients[i].amount === "0" ? "" : (ingredients[i].amount + " of ")) + ingredients[i].name;
@@ -15,7 +15,7 @@ class RecipeEdit extends React.Component {
     {
       steps[i] = steps[i].step;
     }
-    this.state = {name: this.props.recipe.name, editIngredients: ingredients, editSteps: steps, tags: this.props.recipe.tags};
+    this.state = {name: this.props.recipe.name, ingredients: ingredients, steps: steps, tags: this.props.recipe.tags};
     console.log(this.state);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleIngredientsChange = this.handleIngredientsChange.bind(this);
@@ -142,11 +142,11 @@ class RecipeEdit extends React.Component {
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.editIngredients} placeholder="separate by commas" />
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.editSteps} placeholder="separate by commas"/>
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas"/>
           </Form.Group>
           <Form.Group controlId="tags">
             <Form.Label>Tags</Form.Label>
