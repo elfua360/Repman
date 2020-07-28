@@ -89,12 +89,12 @@ class MainPage extends React.Component {
                 if (this.status === 201) {
                     deleteRecipeLocal();
                 } else {
-                    console.log("AAAAAAA1AAAA");
-                    console.log(this.status);
+                    //console.log("AAAAAAA1AAAA");
+                    //console.log(this.status);
                 }
             });
         } catch (err) {
-            console.log("1AAAAAAAAAAA");
+            //console.log("1AAAAAAAAAAA");
         }
 
         xhr.open("DELETE", "https://jd2.aleccoder.space/api/recipes/delete");
@@ -244,7 +244,7 @@ class MainPage extends React.Component {
                                     <ListGroup>
                                         <Card.Title>Ingredients</Card.Title>
                                         <ListGroup.Item>
-                                            {console.log(recipe)}
+                                            {console.log("Rendering " + recipe)}
                                             {
                                                 recipe.ingredients.map((ingredient, index) => (
                                                     <ListGroup.Item

@@ -114,7 +114,9 @@ class RecipeEdit extends React.Component {
         && regex2.test(this.state.ingredients) && regex3.test(this.state.ingredients)
         && regex2.test(this.state.steps) && regex3.test(this.state.steps)
         && regex2.test(this.state.tags) && regex3.test(this.state.tags);
-    console.log(this.state);
+    console.log("RecipeEdit render state: " + this.state);
+    console.log("RedipeEdit render this.props.recipe: " + this.props.recipe);
+
     return(
       <Modal show={onShow} onHide={this.handleCancel}>
         <Modal.Header closeButton>
