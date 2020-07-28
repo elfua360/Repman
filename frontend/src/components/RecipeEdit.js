@@ -127,19 +127,19 @@ class RecipeEdit extends React.Component {
         <Modal.Body>
           <Form.Group controlId="recipeName">
             <Form.Label>Recipe Name</Form.Label>
-            <Form.Control type="text" required onChange={this.handleNameChange} value={this.state.name} placeholder="Enter Recipe Name" />
+            <Form.Control type="text" required onKeyUp={this.handleNameChange} value={this.state.name} placeholder="Enter Recipe Name" />
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
+            <Form.Control as="textarea" type="text" rows="3" required onKeyUp={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas"/>
+            <Form.Control as="textarea" type="text" rows="3" required onKeyUp={this.handleStepsChange} value={this.state.steps} placeholder="separate by commas"/>
           </Form.Group>
           <Form.Group controlId="tags">
             <Form.Label>Tags</Form.Label>
-            <Form.Control as="textarea" type="text" rows="1" required onChange={this.handleTagsChange}
+            <Form.Control as="textarea" type="text" rows="1" required onKeyUp={this.handleTagsChange}
                           value={this.state.tags} placeholder="separate by commas"/>
           </Form.Group>
         </Modal.Body>
