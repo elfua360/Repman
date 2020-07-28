@@ -4,7 +4,9 @@ import {Modal,Form,Button} from 'react-bootstrap';
 class RecipeEdit extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {name: "", ingredients: "", steps: "", tags: ""};
+    console.log(this.props.recipe);
+    this.state = {name: this.props.recipe.name, ingredients: this.props.recipe.ingredients, steps: this.props.recipe.steps, tags: this.props.recipe.tags};
+    console.log(this.state);
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleIngredientsChange = this.handleIngredientsChange.bind(this);
     this.handleStepsChange = this.handleStepsChange.bind(this);
@@ -116,8 +118,7 @@ class RecipeEdit extends React.Component {
         && regex2.test(this.state.tags) && regex3.test(this.state.tags);
     console.log(this.state);
     console.log(this.props.recipe);
-    this.setState({name: this.props.recipe.name, ingredients: this.props.recipe.ingredients,
-    steps: this.props.recipe.steps, tags: this.props.recipe.tags});
+    //this.setState({name: this.props.recipe.name, ingredients: this.props.recipe.ingredients, steps: this.props.recipe.steps, tags: this.props.recipe.tags});
 
     return(
       <Modal show={onShow} onHide={this.handleCancel}>
