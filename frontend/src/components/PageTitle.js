@@ -1,7 +1,8 @@
 import React from 'react'
 import "./PageTitle.css"
 import {Navbar, Nav, NavDropdown, FormControl, Form, Button} from "react-bootstrap";
-import ForgotPassword from "./ForgotPassword";
+import ChangePassword from "./ChangePassword";
+
 
 class PageTitle extends React.Component {
     doLogout = () => {
@@ -48,7 +49,6 @@ class PageTitle extends React.Component {
         const search = this.props.onSearch;
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
-        // alert(jsonPayload); // DELETEME
 
         try {
             xhr.addEventListener("load", function () {
@@ -93,7 +93,7 @@ class PageTitle extends React.Component {
 
                     </Navbar.Collapse>
                 </Navbar>
-                <ForgotPassword browserState={this.props.browserState} showForgotStatus={this.props.showForgotStatus} toggleForgot={this.props.toggleForgot}/>
+                <ChangePassword browserState={this.props.browserState} showForgotStatus={this.props.showForgotStatus} toggleForgot={this.props.toggleForgot}/>
             </div>
         )
     };
