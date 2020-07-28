@@ -46,13 +46,58 @@ class RecipeEdit extends React.Component {
     const onEdit = this.props.onEdit;
     const currentlyEditing = this.props.currentlyEditing;
     const regExp = /\s*,\s*/;
+    const regExpIngredients = /\s*of\s*/;
+    const id = this.props.recipeid;
     var name = this.state.name;
-    var ingredients = this.state.ingredients.split(regExp);
-    var steps = this.state.steps.split(regExp);
+    var newIngredients = this.state.ingredients.split(regExp);
+    var newSteps = this.state.steps.split(regExp);
     var tags = this.state.tags.split(regExp);
+    var steps = [];
+    var ingredients = [];
+    console.log("id:" + id);
+    for (let i = 0; i < newSteps.length; i++) {
+        let step = {};
+        step["step"] = newSteps[i];
+        step["number"] = i;
+        steps.push(step);
+    }
+    for (let i = 0; i < newIngredients.length; i++) {
+        let ingredient = {};
+        let newIngrd = newIngredients[i].split(regExpIngredients);
+        ingredient["name"] = (newIngrd.length === 1) ? newIngrd[0] : newIngrd[1];
+        ingredient["amount"] = (newIngrd.length === 1) ? 0 : newIngrd[0];
+        ingredients.push(ingredient);
+    }
 
+    const jsonPayload = JSON.stringify({
+        "name": name,
+        "id": id,
+        "ingredients": ingredients,
+        "steps": steps,
+        "tags": tags
+    });
 
-    onEdit(name, ingredients, steps, tags, currentlyEditing);
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    try {
+      xhr.addEventListener("load", function () {
+          if (this.status === 200 || this.status === 201) {
+              setTimeout(() => {
+                onEdit(name, ingredients, steps, tags, currentlyEditing);
+              }, 1500);
+          } else {
+              alert("Error " + this.status + ": " + this.responseText); // TODO: make error messaging better
+          }
+      });
+    } catch (err) {
+      alert(err.message);
+    }
+
+    xhr.open("PUT", "https://jd2.aleccoder.space/api/recipes/update")
+    xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+    xhr.send(jsonPayload);
+    
   }
   handleCancel() {
     const onEditModal = this.props.onEditModal;
