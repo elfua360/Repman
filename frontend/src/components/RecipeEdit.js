@@ -125,8 +125,10 @@ class RecipeEdit extends React.Component {
   }
   handleCancel() {
     const onEditModal = this.props.onEditModal;
-    this.setState({name: this.props.recipe.name, ingredients: this.props.recipe.ingredients.join(","),
-    steps: this.props.recipe.steps.join(","), tags: this.props.recipe.tags.join(",")});
+
+    this.setState({name: this.props.recipe.name, ingredients: this.props.recipe.ingredients,
+    steps: this.props.recipe.steps, tags: this.props.recipe.tags});
+    console.log(this.state);
     onEditModal();
   }
   render() {
@@ -139,7 +141,7 @@ class RecipeEdit extends React.Component {
         && regex2.test(this.state.steps) && regex3.test(this.state.steps)
         && regex2.test(this.state.tags) && regex3.test(this.state.tags);
     console.log(this.state);
-    console.log(this.props.recipe);/*
+    console.log(this.props.recipe.ingredients);/*
     var ingredients = this.props.recipe.ingredients;
     var steps = this.props.recipe.steps;
     var newIngredients = [];
@@ -165,7 +167,8 @@ class RecipeEdit extends React.Component {
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients.map((ingredient, index) => (
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={
+              this.state.ingredients.map((ingredient, index) => (
                                                     (ingredient.amount === "0" ? "" : (ingredient.amount + " of ")) + ingredient.name
                                                 ))} placeholder="separate by commas" />
           </Form.Group>
