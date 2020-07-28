@@ -5,6 +5,16 @@ class RecipeEdit extends React.Component {
   constructor(props) {
     super(props);
     console.log(this.props.recipe);
+    const ingredients = this.props.recipe.ingredients;
+    const steps = this.props.recipe.steps;
+    for (let i = 0; i < ingredients.length; i++)
+    {
+      ingredients[i] = (ingredient.amount === "0" ? "" : (ingredient.amount + " of ")) + ingredient.name;
+    }
+    for (let i = 0; i < steps.length; i++)
+    {
+      steps[i] = steps.step;
+    }
     this.state = {name: this.props.recipe.name, ingredients: this.props.recipe.ingredients, steps: this.props.recipe.steps, tags: this.props.recipe.tags};
     console.log(this.state);
     this.handleNameChange = this.handleNameChange.bind(this);
