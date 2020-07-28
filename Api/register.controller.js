@@ -117,8 +117,10 @@ exports.verify = (req, res, next) => {
                                 .json(vm.ApiResponse(false, 500, "something went wrong"));
                         }
                         else {
-                            return res.status(200)
-                                .json(vm.ApiResponse(true, 200, "account activated"));
+                        /*    return res.status(200)
+                                .json(vm.ApiResponse(true, 200, "account activated")); */
+                            res.set('Content-Type', 'text/html');
+                            res.send(new Buffer('<h2>Account Activated</h2>'));
                         }
                     });
                 }
