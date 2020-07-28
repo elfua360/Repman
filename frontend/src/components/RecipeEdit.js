@@ -35,7 +35,18 @@ class RecipeEdit extends React.Component {
     this.setState({name: e.target.value});
   }
   handleIngredientsChange(e) {
-    this.setState({ingredients: e.target.value});
+    const regExp = /\s*,\s*/;
+    const regExpIngredients = /\s*of\s*/;
+    var newIngredients = e.target.value.split(regExp);
+    var ingredients = [];
+    for (let i = 0; i < newIngredients.length; i++) {
+      let ingredient = {};
+      let newIngrd = newIngredients[i].split(regExpIngredients);
+      ingredient["name"] = (newIngrd.length === 1) ? newIngrd[0] : newIngrd[1];
+      ingredient["amount"] = (newIngrd.length === 1) ? 0 : newIngrd[0];
+      ingredients.push(ingredient);
+  }
+    this.setState({ingredients: ingredients});
   }
   handleStepsChange(e) {
     this.setState({steps: e.target.value});
@@ -50,28 +61,28 @@ class RecipeEdit extends React.Component {
     const onEdit = this.props.onEdit;
     const currentlyEditing = this.props.currentlyEditing;
     const regExp = /\s*,\s*/;
-    const regExpIngredients = /\s*of\s*/;
+    //const regExpIngredients = /\s*of\s*/;
     const id = this.props.recipe.id;
     var name = this.state.name;
-    var newIngredients = this.state.ingredients.split(regExp);
+    //var newIngredients = this.state.ingredients.split(regExp);
     var newSteps = this.state.steps.split(regExp);
     var tags = this.state.tags;
     var steps = [];
-    var ingredients = [];
+    var ingredients = this.state.ingredients;
     console.log("id:" + id);
     for (let i = 0; i < newSteps.length; i++) {
         let step = {};
         step["step"] = newSteps[i];
         step["number"] = i;
         steps.push(step);
-    }
+    }/*
     for (let i = 0; i < newIngredients.length; i++) {
         let ingredient = {};
         let newIngrd = newIngredients[i].split(regExpIngredients);
         ingredient["name"] = (newIngrd.length === 1) ? newIngrd[0] : newIngrd[1];
         ingredient["amount"] = (newIngrd.length === 1) ? 0 : newIngrd[0];
         ingredients.push(ingredient);
-    }
+    }*/
 
     const jsonPayload = JSON.stringify({
         "name": name,
