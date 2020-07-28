@@ -165,7 +165,9 @@ class RecipeEdit extends React.Component {
           </Form.Group>
           <Form.Group controlId="recipeIngredients">
             <Form.Label>Recipe Ingredients</Form.Label>
-            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients} placeholder="separate by commas" />
+            <Form.Control as="textarea" type="text" rows="3" required onChange={this.handleIngredientsChange} value={this.state.ingredients.map((ingredient, index) => (
+                                                    (ingredient.amount === "0" ? "" : (ingredient.amount + " of ")) + ingredient.name
+                                                ))} placeholder="separate by commas" />
           </Form.Group>
           <Form.Group controlId="recipeSteps">
             <Form.Label>Recipe Steps</Form.Label>
