@@ -12,7 +12,7 @@ class RecipeQRCode extends React.Component {
                 <Modal.Body>
                     <div class="align-content-center">
                         <Image id="qrCodeImage"
-                               src={"https://jd2.aleccoder.space/api/recipes/qrcode/" + this.props.recipe}/>
+                               src={"https://jd2.aleccoder.space/api/recipes/qrcode/" + this.props.recipe} width="450" height="450"/>
                     </div>
                 </Modal.Body>
             </Modal>
