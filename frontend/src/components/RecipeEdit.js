@@ -49,7 +49,16 @@ class RecipeEdit extends React.Component {
     this.setState({ingredients: ingredients});
   }
   handleStepsChange(e) {
-    this.setState({steps: e.target.value});
+    const regExp = /\s*,\s*/;
+    var newSteps = e.target.value.split(regExp);
+    var steps = [];
+    for (let i = 0; i < newSteps.length; i++) {
+      let step = {};
+      step["step"] = newSteps[i];
+      step["number"] = i;
+      steps.push(step);
+    }
+    this.setState({steps: steps});
   }
   handleTagsChange(e) {
     const regExp = /\s*,\s*/;
@@ -60,17 +69,17 @@ class RecipeEdit extends React.Component {
     e.preventDefault();
     const onEdit = this.props.onEdit;
     const currentlyEditing = this.props.currentlyEditing;
-    const regExp = /\s*,\s*/;
+    //const regExp = /\s*,\s*/;
     //const regExpIngredients = /\s*of\s*/;
     const id = this.props.recipe.id;
     var name = this.state.name;
     //var newIngredients = this.state.ingredients.split(regExp);
-    var newSteps = this.state.steps.split(regExp);
+    //var newSteps = this.state.steps.split(regExp);
     var tags = this.state.tags;
-    var steps = [];
+    var steps = this.state.steps;
     var ingredients = this.state.ingredients;
     console.log("id:" + id);
-    for (let i = 0; i < newSteps.length; i++) {
+    /*for (let i = 0; i < newSteps.length; i++) {
         let step = {};
         step["step"] = newSteps[i];
         step["number"] = i;
