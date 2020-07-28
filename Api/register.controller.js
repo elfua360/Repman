@@ -117,8 +117,10 @@ exports.verify = (req, res, next) => {
                                 .json(vm.ApiResponse(false, 500, "something went wrong"));
                         }
                         else {
-                            return res.status(200)
-                                .json(vm.ApiResponse(true, 200, "account activated"));
+                        /*    return res.status(200)
+                                .json(vm.ApiResponse(true, 200, "account activated")); */
+                            res.set('Content-Type', 'text/html');
+                            res.send(new Buffer('<a href="https://jd2.aleccoder.space">Account activated! Click to return home</a>')); // <a href="https://jd2.aleccoder.space">Return home</a>
                         }
                     });
                 }
